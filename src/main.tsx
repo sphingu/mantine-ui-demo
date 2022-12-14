@@ -1,11 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {Button, MantineProvider} from '@mantine/core'
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Button>Hello Mantine</Button>
-    </MantineProvider>
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
