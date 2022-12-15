@@ -1,15 +1,44 @@
-import { Text, Button, Stack } from "@mantine/core";
-import { ThemeProvider } from "./ThemeProvider";
+import { Text, Button, Stack } from '@mantine/core'
+import { ThemeProvider } from './ThemeProvider'
+import {
+  RouterProvider,
+  createReactRouter,
+  createRouteConfig,
+  Link,
+  Outlet,
+} from '@tanstack/react-router'
+import { About, Home } from './pages'
+import { Header } from './components'
+
+const rootRoute = createRouteConfig({
+  component: () => (
+    <>
+      {/* Header  */}
+      <Header />
+      {/* Content */}
+      <Outlet />
+    </>
+  ),
+})
+
+const indexRoute = rootRoute.createRoute({
+  path: '/',
+  component: Home,
+})
+
+const aboutRoute = rootRoute.createRoute({
+  path: '/about',
+  component: About,
+})
+
+const routeConfig = rootRoute.addChildren([indexRoute, aboutRoute])
+
+const router = createReactRouter({ routeConfig })
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Stack align="center" mt={50}>
-        <Text size="xl" weight={500}>
-          Welcome to Mantine!
-        </Text>
-        <Button>Click the button</Button>
-      </Stack>
+      <RouterProvider router={router} />
     </ThemeProvider>
-  );
+  )
 }
