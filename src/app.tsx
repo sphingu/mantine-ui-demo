@@ -8,7 +8,7 @@ import {
   Outlet,
 } from '@tanstack/react-router'
 import { About, Home } from './pages'
-import { Header } from './components'
+import { Header, TanStackRouterDevtools } from './components'
 
 const rootRoute = createRouteConfig({
   component: () => (
@@ -39,6 +39,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <RouterProvider router={router} />
+      <TanStackRouterDevtools router={router} />
     </ThemeProvider>
   )
 }
