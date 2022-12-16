@@ -8,14 +8,15 @@ import {
   Outlet,
 } from '@tanstack/react-router'
 import { About, Home } from './pages'
-import { Header, TanStackRouterDevtools } from './components'
+import { TanStackRouterDevtools } from './components'
+import { RealHeader } from './components/RealHeader'
 
 const rootRoute = createRouteConfig({
   component: () => (
     <>
       {/* Header  */}
-      <Header />
       {/* Content */}
+      <RealHeader links={[]} />
       <Outlet />
     </>
   ),
@@ -35,11 +36,17 @@ const routeConfig = rootRoute.addChildren([indexRoute, aboutRoute])
 
 const router = createReactRouter({ routeConfig })
 
+declare module '@tanstack/react-router' {
+  interface RegisterRouter {
+    router: typeof router
+  }
+}
+
 export default function App() {
   return (
     <ThemeProvider>
       <RouterProvider router={router} />
-      <TanStackRouterDevtools router={router} />
+      <TanStackRouterDevtools router={router} position="bottom-right" />
     </ThemeProvider>
   )
 }

@@ -1,11 +1,12 @@
-import { MantineProvider, MantineThemeOverride } from "@mantine/core";
+import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 
 export const theme: MantineThemeOverride = {
-  colorScheme: "dark",
-};
+  colorScheme: 'light',
+  fontFamily: "'Montserrat', serif",
+}
 
 interface ThemeProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
@@ -13,5 +14,5 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
       {children}
     </MantineProvider>
-  );
+  )
 }

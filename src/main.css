@@ -1,0 +1,17 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: 'Slabo 27px', serif;
+}
+/* body {
+  background: url(bg2.jpg) no-repeat center center fixed;
+  background-size: cover;
+} */
+#root {
+  height: 100%;
+}
+#root nav {
+  height: 100%;
+}
