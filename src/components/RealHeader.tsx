@@ -98,10 +98,14 @@ interface HeaderResponsiveProps {
 
 export function RealHeader({ links }: HeaderResponsiveProps) {
   const [opened, { toggle, close }] = useDisclosure(false)
-  const ref = useClickOutside(() => close(), ['mouseup', 'touchend'])
+  const ref = useClickOutside(
+    () => setTimeout(close, 300),
+    ['mouseup', 'touchend']
+  )
   const { classes } = useStyles()
 
-  // TODO: need to make this dynamic and need to close menu on close click on mobile screen
+  console.log('one', { opened })
+  // TODO: need to make this dynamic
   const navLinks = [
     <Link
       key="home"
@@ -132,11 +136,7 @@ export function RealHeader({ links }: HeaderResponsiveProps) {
 
         <Burger
           opened={opened}
-          onClick={(e) => {
-            if (!opened) {
-              toggle()
-            }
-          }}
+          onClick={toggle}
           className={classes.burger}
           size="sm"
         />
