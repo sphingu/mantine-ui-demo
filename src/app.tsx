@@ -1,14 +1,14 @@
-import { Text, Button, Stack, Container } from '@mantine/core'
+import { Container } from '@mantine/core'
 import { ThemeProvider } from './ThemeProvider'
 import {
   RouterProvider,
   createReactRouter,
   createRouteConfig,
-  Link,
   Outlet,
 } from '@tanstack/react-router'
 import { About, Home } from './pages'
 import { TanStackRouterDevtools, AppHeader } from './components'
+import { NotificationsProvider } from '@mantine/notifications'
 
 const rootRoute = createRouteConfig({
   component: () => (
@@ -49,7 +49,10 @@ declare module '@tanstack/react-router' {
 export default function App() {
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <NotificationsProvider>
+        <RouterProvider router={router} />
+      </NotificationsProvider>
+
       <TanStackRouterDevtools router={router} position="bottom-right" />
     </ThemeProvider>
   )
