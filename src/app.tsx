@@ -8,15 +8,12 @@ import {
   Outlet,
 } from '@tanstack/react-router'
 import { About, Home } from './pages'
-import { TanStackRouterDevtools } from './components'
-import { RealHeader } from './components/RealHeader'
+import { TanStackRouterDevtools, AppHeader } from './components'
 
 const rootRoute = createRouteConfig({
   component: () => (
     <>
-      {/* Header  */}
-      {/* Content */}
-      <RealHeader
+      <AppHeader
         links={[
           { label: 'Home', link: '/' },
           { label: 'About', link: '/about' },

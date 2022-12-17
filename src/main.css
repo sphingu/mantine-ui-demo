@@ -6,7 +6,7 @@ body {
   font-family: 'Slabo 27px', serif;
 }
 body {
-  background: url(bg6.jpg) no-repeat center center fixed;
+  background: url('/bg6.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 #root {

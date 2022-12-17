@@ -98,7 +98,7 @@ interface HeaderResponsiveProps {
   links: { link: string; label: string }[]
 }
 
-export function RealHeader({ links }: HeaderResponsiveProps) {
+export function AppHeader({ links }: HeaderResponsiveProps) {
   const [opened, { toggle, close }] = useDisclosure(false)
   const ref = useClickOutside(
     () => setTimeout(close, 300),
@@ -107,8 +107,6 @@ export function RealHeader({ links }: HeaderResponsiveProps) {
   const { classes } = useStyles()
   const { navigate } = useRouter()
 
-  console.log('one', { opened })
-  // TODO: need to make this dynamic
   const navLinks = links.map((link) => (
     <a
       key={link.link}
