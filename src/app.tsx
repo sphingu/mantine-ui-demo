@@ -11,6 +11,7 @@ import {
   TanStackRouterDevtools,
   AppHeader,
   RegisterHotKeys,
+  RegisterSpotlight,
 } from './components'
 import { NotificationsProvider } from '@mantine/notifications'
 
@@ -27,6 +28,7 @@ const rootRoute = createRouteConfig({
         <Outlet />
       </Container>
       <RegisterHotKeys />
+      <RegisterSpotlight />
     </>
   ),
 })
