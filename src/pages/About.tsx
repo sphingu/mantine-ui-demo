@@ -1,1 +1,11 @@
-export const About = () => <h1>About page</h1>;
+export const About = () => {
+  return (
+    <>
+      <h1>About page</h1>
+      <h1>About page</h1>
+      <h1>About page</h1>
+      <h1>About page</h1>
+      <h1>About page</h1>
+    </>
+  )
+}

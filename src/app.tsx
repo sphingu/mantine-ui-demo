@@ -1,4 +1,4 @@
-import { Text, Button, Stack } from '@mantine/core'
+import { Text, Button, Stack, Container } from '@mantine/core'
 import { ThemeProvider } from './ThemeProvider'
 import {
   RouterProvider,
@@ -16,8 +16,15 @@ const rootRoute = createRouteConfig({
     <>
       {/* Header  */}
       {/* Content */}
-      <RealHeader links={[]} />
-      <Outlet />
+      <RealHeader
+        links={[
+          { label: 'Home', link: '/' },
+          { label: 'About', link: '/about' },
+        ]}
+      />
+      <Container className="one box-style">
+        <Outlet />
+      </Container>
     </>
   ),
 })

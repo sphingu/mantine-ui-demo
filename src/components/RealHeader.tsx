@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 import { useClickOutside, useDisclosure } from '@mantine/hooks'
 import { IconChartRadar } from '@tabler/icons'
-import { Link } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 
 const HEADER_HEIGHT = 60
 
@@ -17,6 +17,8 @@ const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
     zIndex: 1,
+    marginBottom: '0 !important',
+    background: '#041013b5 !important',
   },
 
   dropdown: {
@@ -103,33 +105,36 @@ export function RealHeader({ links }: HeaderResponsiveProps) {
     ['mouseup', 'touchend']
   )
   const { classes } = useStyles()
+  const { navigate } = useRouter()
 
   console.log('one', { opened })
   // TODO: need to make this dynamic
-  const navLinks = [
-    <Link
-      key="home"
-      to={'/'}
+  const navLinks = links.map((link) => (
+    <a
+      key={link.link}
+      href="#"
       className={classes.link}
-      activeProps={{ className: classes.linkActive }}
+      onClick={(e) => {
+        e.preventDefault()
+        navigate({ to: link.link as any })
+        close()
+      }}
     >
-      Home
-    </Link>,
-    <Link
-      key="about"
-      to={'/about'}
-      className={classes.link}
-      activeProps={{ className: classes.linkActive }}
-    >
-      About
-    </Link>,
-  ]
+      {link.label}
+    </a>
+  ))
 
   return (
-    <Header height={HEADER_HEIGHT} mb={120} className={classes.root}>
+    <Header
+      height={HEADER_HEIGHT}
+      mb={120}
+      className={`${classes.root} box-style`}
+    >
       <Container className={classes.header}>
-        <IconChartRadar size="28" color="black" stroke={1.5} />
-        <h1>Mantine</h1>
+        <Group>
+          <IconChartRadar size="34" color="#228be6" stroke={1.5} />
+          <h1>Mantine</h1>
+        </Group>
         <Group spacing={5} className={classes.links}>
           {navLinks}
         </Group>
