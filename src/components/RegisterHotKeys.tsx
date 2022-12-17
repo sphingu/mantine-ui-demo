@@ -1,0 +1,12 @@
+import { useHotkeys } from '@mantine/hooks'
+import { useRoute, useRouter } from '@tanstack/react-router'
+
+export const RegisterHotKeys = () => {
+  const { navigate } = useRouter()
+  useHotkeys([
+    ['H', () => navigate({ to: '/' })],
+    ['A', () => navigate({ to: '/about' })],
+  ])
+
+  return null
+}

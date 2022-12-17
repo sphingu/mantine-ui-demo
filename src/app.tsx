@@ -7,7 +7,11 @@ import {
   Outlet,
 } from '@tanstack/react-router'
 import { About, Home } from './pages'
-import { TanStackRouterDevtools, AppHeader } from './components'
+import {
+  TanStackRouterDevtools,
+  AppHeader,
+  RegisterHotKeys,
+} from './components'
 import { NotificationsProvider } from '@mantine/notifications'
 
 const rootRoute = createRouteConfig({
@@ -22,6 +26,7 @@ const rootRoute = createRouteConfig({
       <Container className="one box-style">
         <Outlet />
       </Container>
+      <RegisterHotKeys />
     </>
   ),
 })
@@ -52,7 +57,6 @@ export default function App() {
       <NotificationsProvider>
         <RouterProvider router={router} />
       </NotificationsProvider>
-
       <TanStackRouterDevtools router={router} position="bottom-right" />
     </ThemeProvider>
   )
