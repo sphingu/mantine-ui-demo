@@ -1,1 +1,8 @@
-export const Home = () => <h1>Home page</h1>;
+import { Form } from '../components'
+
+export const Home = () => (
+  <>
+    <h1>Home Page</h1>
+    <Form />
+  </>
+)
