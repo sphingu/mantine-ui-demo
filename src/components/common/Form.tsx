@@ -11,7 +11,7 @@ import {
 import { showNotification } from '@mantine/notifications'
 
 const schema = Yup.object().shape({
-  name: Yup.string().min(2, 'Name should have at least 2 letters'),
+  name: Yup.string().min(2, 'Name should have at least 2 letters').required(),
 })
 
 interface FormValues {

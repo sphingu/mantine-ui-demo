@@ -1,7 +1,9 @@
 import { Button } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import { usePageTitle } from '../hooks'
 
 export const About = () => {
+  usePageTitle('About')
   return (
     <>
       <h1>About page</h1>
