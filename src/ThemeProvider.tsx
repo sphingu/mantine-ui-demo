@@ -3,6 +3,7 @@ import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 export const theme: MantineThemeOverride = {
   colorScheme: 'dark',
   fontFamily: "'Montserrat', serif",
+  primaryColor: 'lime',
 }
 
 interface ThemeProviderProps {
@@ -11,7 +12,12 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
+    <MantineProvider
+      withCSSVariables
+      withGlobalStyles
+      withNormalizeCSS
+      theme={theme}
+    >
       {children}
     </MantineProvider>
   )
