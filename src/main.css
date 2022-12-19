@@ -6,7 +6,7 @@ body {
   font-family: 'Slabo 27px', serif;
 }
 body {
-  background: url('/bg6.jpg') no-repeat center center fixed;
+  background: url('/bg1.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 #root {
@@ -24,7 +24,8 @@ body {
 
 .box-style {
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 9px 5px #8e8e8e1f;
+  border: 1px solid #00000016;
+  /* box-shadow: 0 0 9px 5px #8e8e8e1f; */
   background-color: #00000026;
-  border: 2px solid #00000024;
+  /* border: 2px dashed white; */
 }

@@ -1,9 +1,9 @@
 import { MantineProvider, MantineThemeOverride } from '@mantine/core'
 
 export const theme: MantineThemeOverride = {
-  colorScheme: 'dark',
+  colorScheme: 'light',
   fontFamily: "'Montserrat', serif",
-  primaryColor: 'lime',
+  // primaryColor: 'lime',
 }
 
 interface ThemeProviderProps {
