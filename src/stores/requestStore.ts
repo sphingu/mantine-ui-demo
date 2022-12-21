@@ -7,7 +7,7 @@ export const useRequestStore = create<IRequestStore>()(
   devtools(
     immer((set) => ({
       list: {},
-      add(request) {
+      create(request) {
         set((state) => {
           state.list[request.id] = request
         })

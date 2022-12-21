@@ -25,7 +25,7 @@ interface Props {
   onSubmit: (values: IRequest) => void
 }
 
-export const CreateRequestForm = ({ initialValues, onSubmit }: Props) => {
+export const RequestAddEditForm = ({ initialValues, onSubmit }: Props) => {
   const isCreate = !initialValues?.id
   const form = useForm<IRequest>({
     initialValues: initialValues || {

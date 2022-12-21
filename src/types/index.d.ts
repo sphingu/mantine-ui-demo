@@ -2,7 +2,7 @@ import { Immutable } from 'immer'
 
 type CRUDStore<T> = Immutable<{
   list: Record<string, T>
-  add: (data: T) => void
+  create: (data: T) => void
   update: (data: T) => void
   delete: (id: string) => void
 }>

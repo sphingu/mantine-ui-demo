@@ -1,6 +1,6 @@
 import { Button } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
-import { CreateRequestForm } from '../components'
+import { RequestAddEditForm } from '../components'
 import { usePageTitle } from '../hooks'
 import { v4 as uuid } from 'uuid'
 
@@ -9,7 +9,7 @@ export const About = () => {
   return (
     <>
       <h1>About page</h1>
-      <CreateRequestForm
+      <RequestAddEditForm
         initialValues={{
           id: uuid(),
           method: 'POST',
