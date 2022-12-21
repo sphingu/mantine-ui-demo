@@ -26,10 +26,12 @@
     "@tanstack/react-router": "0.0.1-beta.38",
     "dayjs": "^1.11.7",
     "embla-carousel-react": "^7.0.5",
+    "immer": "^9.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zustand": "^4.1.5"
   },
   "devDependencies": {
     "@tanstack/react-router-devtools": "0.0.1-beta.36",

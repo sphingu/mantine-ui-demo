@@ -7,18 +7,10 @@ import {
   NativeSelect,
   TextInput,
 } from '@mantine/core'
-import { FormErrors, FORM_INDEX, useForm, yupResolver } from '@mantine/form'
+import { FormErrors, useForm, yupResolver } from '@mantine/form'
+import { IRequest } from '../../types'
 
-type IRequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 const REQUEST_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-
-interface IRequest {
-  id: string
-  name: string
-  method: IRequestMethod
-  url: string
-  body?: string
-}
 
 const requestSchema: yup.SchemaOf<IRequest> = yup.object().shape({
   id: yup.string().required().uuid(),
@@ -59,6 +51,7 @@ export const CreateRequestForm = ({ initialValues, onSubmit }: Props) => {
         label="Method"
         placeholder="Choose request method"
         data={REQUEST_METHODS}
+        {...form.getInputProps('method')}
       />
       <TextInput withAsterisk label="URL" {...form.getInputProps('url')} />
       <JsonInput
