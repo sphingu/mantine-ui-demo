@@ -48,7 +48,9 @@ export const RequestCrud = () => {
   const formTitle = (selectedRequest ? 'Update' : 'Add') + ' Request'
   return (
     <>
-      <Button onClick={() => openForm()}>Add Request</Button>
+      <Button size="md" onClick={() => openForm()}>
+        Add Request
+      </Button>
       <RequestList
         requests={Object.values(requestStore.list)}
         onEdit={openForm}

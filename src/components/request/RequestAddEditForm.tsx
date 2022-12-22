@@ -45,16 +45,28 @@ export const RequestAddEditForm = ({ initialValues, onSubmit }: Props) => {
       onSubmit={form.onSubmit(onSubmit, handleError)}
       onReset={form.onReset}
     >
-      <TextInput withAsterisk label="Name" {...form.getInputProps('name')} />
+      <TextInput
+        size="md"
+        withAsterisk
+        label="Name"
+        {...form.getInputProps('name')}
+      />
       <NativeSelect
+        size="md"
         withAsterisk
         label="Method"
         placeholder="Choose request method"
         data={REQUEST_METHODS}
         {...form.getInputProps('method')}
       />
-      <TextInput withAsterisk label="URL" {...form.getInputProps('url')} />
+      <TextInput
+        size="md"
+        withAsterisk
+        label="URL"
+        {...form.getInputProps('url')}
+      />
       <JsonInput
+        size="md"
         label="Body"
         validationError="invalid JSON"
         formatOnBlur
@@ -63,10 +75,15 @@ export const RequestAddEditForm = ({ initialValues, onSubmit }: Props) => {
         {...form.getInputProps('body')}
       />
       <Group position="right" mt="xl">
-        <Button type="submit" disabled={!form.isDirty()}>
+        <Button size="md" type="submit" disabled={!form.isDirty()}>
           {isCreate ? 'Create Request' : 'Update Request'}
         </Button>
-        <Button variant="default" type="reset" disabled={!form.isDirty()}>
+        <Button
+          size="md"
+          variant="default"
+          type="reset"
+          disabled={!form.isDirty()}
+        >
           Reset
         </Button>
       </Group>
