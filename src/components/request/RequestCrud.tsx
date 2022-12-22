@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@mantine/core'
+import { Button, Drawer } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 
 import { RequestAddEditForm } from './RequestAddEditForm'
@@ -12,10 +12,15 @@ export const RequestCrud = () => {
   const [selectedRequest, setSelectedRequest] = useState<IRequest | undefined>()
   const requestStore = useRequestStore()
 
-  const handleEditRequest = (request: IRequest) => {
+  const openForm = (request?: IRequest) => {
     setSelectedRequest(request)
     setFormVisible(true)
   }
+  const closeForm = () => {
+    setFormVisible(false)
+    setSelectedRequest(undefined)
+  }
+
   const handleDeleteRequest = (requestId: string) => {
     // todo show confirm dialog and delete
     requestStore.delete(requestId)
@@ -23,10 +28,6 @@ export const RequestCrud = () => {
       message: 'Request deleted successfully',
       color: 'green',
     })
-  }
-  const handleAddRequest = () => {
-    setSelectedRequest(undefined)
-    setFormVisible(true)
   }
   const handleSubmitRequest = (request: IRequest) => {
     if (selectedRequest) {
@@ -42,23 +43,29 @@ export const RequestCrud = () => {
         color: 'green',
       })
     }
-    setFormVisible(false)
-    setSelectedRequest(undefined)
+    closeForm()
   }
+  const formTitle = (selectedRequest ? 'Update' : 'Add') + ' Request'
   return (
     <>
-      <Button onClick={handleAddRequest}>Add Request</Button>
+      <Button onClick={() => openForm()}>Add Request</Button>
       <RequestList
         requests={Object.values(requestStore.list)}
-        onEdit={handleEditRequest}
+        onEdit={openForm}
         onDelete={handleDeleteRequest}
       />
-      {isFormVisible && (
+      <Drawer
+        opened={isFormVisible}
+        onClose={() => closeForm()}
+        title={<h1 style={{ margin: 0 }}>{formTitle}</h1>}
+        padding="xl"
+        size="xl"
+      >
         <RequestAddEditForm
           initialValues={selectedRequest}
           onSubmit={handleSubmitRequest}
         />
-      )}
+      </Drawer>
     </>
   )
 }
