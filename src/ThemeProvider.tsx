@@ -4,6 +4,11 @@ export const theme: MantineThemeOverride = {
   colorScheme: 'light',
   fontFamily: "'Montserrat', serif",
   // primaryColor: 'lime',
+  focusRingStyles: {
+    inputStyles: () => ({
+      borderWidth: '2px',
+    }),
+  },
 }
 
 interface ThemeProviderProps {
