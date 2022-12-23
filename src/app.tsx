@@ -1,36 +1,58 @@
-import { Container } from '@mantine/core'
-import { ThemeProvider } from './ThemeProvider'
+import { useEffect } from 'react'
+import { Container, Group, Loader } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import {
   RouterProvider,
   createReactRouter,
   createRouteConfig,
   Outlet,
 } from '@tanstack/react-router'
-import { About, Home } from './pages'
+import { About, Home, Login } from './pages'
 import {
   TanStackRouterDevtools,
   AppHeader,
   RegisterHotKeys,
   RegisterSpotlight,
 } from './components'
-import { NotificationsProvider } from '@mantine/notifications'
+import { ThemeProvider } from './ThemeProvider'
+import { useSessionStore } from './stores'
 
-const rootRoute = createRouteConfig({
-  component: () => (
+const MainComponent = () => {
+  const sessionStore = useSessionStore()
+
+  useEffect(() => {
+    sessionStore.fetchSessionInfo()
+  }, [])
+
+  return (
     <>
       <AppHeader
+        isAuthenticated={sessionStore.isAuthenticated()}
         links={[
           { label: 'Home', link: '/' },
           { label: 'About', link: '/about' },
         ]}
+        onLogout={sessionStore.logOut}
       />
       <Container className="one box-style">
-        <Outlet />
+        {sessionStore.loading ? (
+          <Group position="center">
+            <Loader />
+          </Group>
+        ) : sessionStore.isAuthenticated() ? (
+          <Outlet />
+        ) : (
+          <Login onLoginClick={sessionStore.login} />
+        )}
       </Container>
       <RegisterHotKeys />
       <RegisterSpotlight />
     </>
-  ),
+  )
+}
+
+const rootRoute = createRouteConfig({
+  component: MainComponent,
 })
 
 const indexRoute = rootRoute.createRoute({

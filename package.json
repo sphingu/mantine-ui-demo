@@ -23,6 +23,7 @@
     "@mantine/nprogress": "^5.9.4",
     "@mantine/prism": "^5.9.4",
     "@mantine/spotlight": "^5.9.4",
+    "@supabase/supabase-js": "^2.2.2",
     "@tabler/icons": "^1.117.0",
     "@tanstack/react-router": "0.0.1-beta.38",
     "dayjs": "^1.11.7",

@@ -34,45 +34,54 @@ export async function makeRequest<T>({
   })
 
   const requestUrl = url.includes('http') ? url : `${baseUrl}${url}`
-  const response = await fetch(requestUrl, {
-    ...options,
-    method,
-    headers: getHeaders(),
-    body: body ? JSON.stringify(body) : undefined,
-  })
-
-  const text = await response.text()
-
-  let data
   try {
-    data = JSON.parse(text)
-  } catch (error) {
-    // console.log('failed to parse response', error)
-  }
-
-  // success case
-  if (response.ok && !data?.error) {
-    updateNotification({
-      id: notificationId,
-      color: 'teal',
-      message: msgs?.success || 'Success',
-      autoClose: 2000,
+    const response = await fetch(requestUrl, {
+      ...options,
+      method,
+      headers: getHeaders(),
+      body: body ? JSON.stringify(body) : undefined,
     })
-    return data
-  }
+    const text = await response.text()
 
-  // error case
-  if (response.status === 401) {
-    // SHOW LOGIN FORM
-  } else if (data?.error === 'XYZ') {
-    // ANY SPECIFIC ERROR
-  } else {
+    let data
+    try {
+      data = JSON.parse(text)
+    } catch (error) {
+      // console.log('failed to parse response', error)
+    }
+
+    // success case
+    if (response.ok && !data?.error) {
+      updateNotification({
+        id: notificationId,
+        color: 'teal',
+        message: msgs?.success || 'Success',
+        autoClose: 2000,
+      })
+      return data
+    }
+
+    // error case
+    if (response.status === 401) {
+      // SHOW LOGIN FORM
+    } else if (data?.error === 'XYZ') {
+      // ANY SPECIFIC ERROR
+    } else {
+      updateNotification({
+        id: notificationId,
+        color: 'red',
+        message: `Error: ${response.status}\n${data?.error || text}`,
+        autoClose: 2000,
+      })
+    }
+  } catch (error) {
     updateNotification({
       id: notificationId,
       color: 'red',
-      message: `Error: ${response.status}\n${data?.error || text}`,
+      message: `An error occurred in fetching information`,
       autoClose: 2000,
     })
   }
+
   throw new Error('An error occurred in fetching information')
 }

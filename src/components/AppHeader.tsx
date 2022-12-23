@@ -94,10 +94,16 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface HeaderResponsiveProps {
+  isAuthenticated: boolean
   links: { link: string; label: string }[]
+  onLogout: () => void
 }
 
-export function AppHeader({ links }: HeaderResponsiveProps) {
+export function AppHeader({
+  links,
+  isAuthenticated,
+  onLogout,
+}: HeaderResponsiveProps) {
   const [opened, { toggle, close }] = useDisclosure(false)
   const ref = useClickOutside(
     () => setTimeout(close, 300),
@@ -106,20 +112,22 @@ export function AppHeader({ links }: HeaderResponsiveProps) {
   const { classes } = useStyles()
   const { navigate } = useRouter()
 
-  const navLinks = links.map((link) => (
-    <a
-      key={link.link}
-      href="#"
-      className={classes.link}
-      onClick={(e) => {
-        e.preventDefault()
-        navigate({ to: link.link as any })
-        close()
-      }}
-    >
-      {link.label}
-    </a>
-  ))
+  const navLinks = isAuthenticated
+    ? links.map((link) => (
+        <a
+          key={link.link}
+          href="#"
+          className={classes.link}
+          onClick={(e) => {
+            e.preventDefault()
+            navigate({ to: link.link as any })
+            close()
+          }}
+        >
+          {link.label}
+        </a>
+      ))
+    : []
 
   return (
     <Header
@@ -134,15 +142,26 @@ export function AppHeader({ links }: HeaderResponsiveProps) {
         </Group>
         <Group spacing={5} className={classes.links}>
           {navLinks}
+          {isAuthenticated && (
+            <a
+              href="#"
+              className={classes.link}
+              onClick={(e) => {
+                e.preventDefault()
+                onLogout()
+                close()
+              }}
+            >
+              Logout
+            </a>
+          )}
         </Group>
-
         <Burger
           opened={opened}
           onClick={toggle}
           className={classes.burger}
           size="sm"
         />
-
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper
@@ -152,6 +171,19 @@ export function AppHeader({ links }: HeaderResponsiveProps) {
               style={styles}
             >
               {navLinks}
+              {isAuthenticated && (
+                <a
+                  href="#"
+                  className={classes.link}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    onLogout()
+                    close()
+                  }}
+                >
+                  Logout
+                </a>
+              )}
             </Paper>
           )}
         </Transition>
