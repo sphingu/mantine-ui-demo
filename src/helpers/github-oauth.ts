@@ -9,10 +9,6 @@ export const signIn = async () => {
   if (error) {
     notifyHelper.error('Received error while trying to login')
     console.error(error)
-  } else {
-    notifyHelper.success(
-      'You have been successfully logged-in, you will be redirected automatically'
-    )
   }
 }
 

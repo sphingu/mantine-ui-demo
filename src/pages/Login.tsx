@@ -16,7 +16,7 @@ export const Login = ({ onLoginClick }: Props) => {
   }
   return (
     <>
-      <h1>
+      <h1 style={{ textAlign: 'center' }}>
         Welcome to <i>Mantine</i> !
       </h1>
       <Text color="dimmed" size="sm" align="center" mt={5}>
