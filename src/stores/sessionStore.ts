@@ -2,15 +2,16 @@ import create from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { devtools } from 'zustand/middleware'
 import { User } from '@supabase/supabase-js'
-import { Immutable } from 'immer'
+import { Immutable, setAutoFreeze } from 'immer'
 import { githubOAuthHelpers } from '../helpers'
 
 type ISessionStore = Immutable<{
   loading: boolean
   userInfo?: User
+  setUserInfo: (userInfo?: User) => void
   setLoading: (value: boolean) => void
   isAuthenticated: () => boolean
-  fetchSessionInfo: () => Promise<void>
+  fetchUserInfo: () => Promise<void>
   login: () => Promise<void>
   logOut: () => void
 }>
@@ -20,6 +21,11 @@ export const useSessionStore = create<ISessionStore>()(
     immer((set, get) => ({
       loading: true,
       userInfo: undefined,
+      setUserInfo: (userInfo?: User) => {
+        set((state) => {
+          state.userInfo = userInfo
+        })
+      },
       setLoading: (value: boolean) =>
         set((state) => {
           state.loading = value
@@ -27,13 +33,11 @@ export const useSessionStore = create<ISessionStore>()(
       isAuthenticated() {
         return !!get().userInfo
       },
-      fetchSessionInfo: async () => {
+      fetchUserInfo: async () => {
         await githubOAuthHelpers
           .getUserInfo()
           .then((userInfo) => {
-            set((state) => {
-              state.userInfo = userInfo
-            })
+            get().setUserInfo(userInfo)
           })
           .finally(() => get().setLoading(false))
       },
@@ -41,11 +45,7 @@ export const useSessionStore = create<ISessionStore>()(
         await githubOAuthHelpers.signIn().then(() => get().setLoading(true))
       },
       logOut() {
-        githubOAuthHelpers.signOut().then(() => {
-          set((state) => {
-            state.userInfo = undefined
-          })
-        })
+        githubOAuthHelpers.signOut()
       },
     }))
   )

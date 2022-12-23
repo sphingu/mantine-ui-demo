@@ -16,12 +16,18 @@ import {
 } from './components'
 import { ThemeProvider } from './ThemeProvider'
 import { useSessionStore } from './stores'
+import { githubOAuthHelpers } from './helpers'
 
 const MainComponent = () => {
   const sessionStore = useSessionStore()
 
   useEffect(() => {
-    sessionStore.fetchSessionInfo()
+    sessionStore.fetchUserInfo()
+
+    const {
+      data: { subscription: authListener },
+    } = githubOAuthHelpers.onAuthStatusChange(sessionStore.setUserInfo)
+    return () => authListener?.unsubscribe()
   }, [])
 
   return (

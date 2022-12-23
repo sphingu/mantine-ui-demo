@@ -29,7 +29,7 @@ export const Login = ({ onLoginClick }: Props) => {
           loaderPosition="center"
           size="lg"
           loading={loading}
-          leftIcon={<IconBrandGithub size="20" />}
+          leftIcon={<IconBrandGithub size="26" />}
           onClick={handleSignIn}
         >
           Sign in with GitHub
