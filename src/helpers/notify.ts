@@ -54,28 +54,31 @@ const updateForError = (id: string, message: string) => {
   })
 }
 
-export const asynchronous =
-  <T>(promise: () => Promise<T>) =>
-  async (
-    messages: {
-      loading?: string
-      success?: string
-      error?: string
-    } = {}
-  ): Promise<T> => {
-    const notificationId = loading(messages.loading || 'Fetching...')
+type IMessages = {
+  loading?: string
+  success?: string
+  error?: string
+}
+
+export const wrapAsync =
+  <TParams extends Array<any>, TResult>(
+    fn: (...args: TParams) => Promise<TResult>,
+    messages?: IMessages
+  ) =>
+  async (...args: TParams): Promise<TResult> => {
+    const notificationId = loading(messages?.loading || 'Fetching...')
     try {
-      const data = await promise()
+      const data = await fn(...args)
       updateForSuccess(
         notificationId,
-        messages.success || 'Fetched information successfully'
+        messages?.success || 'Fetched information successfully'
       )
       return data
     } catch (error) {
       console.error(error)
       updateForError(
         notificationId,
-        messages.error || 'Error occurred while fetching information'
+        messages?.error || 'Error occurred while fetching information'
       )
       throw error
     }
