@@ -4,6 +4,7 @@ export const theme: MantineThemeOverride = {
   colorScheme: 'dark',
   fontFamily: "'Montserrat', serif",
   // primaryColor: 'lime',
+  defaultRadius: 'none',
   focusRingStyles: {
     inputStyles: () => ({
       borderWidth: '2px',

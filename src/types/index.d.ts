@@ -18,3 +18,9 @@ interface IRequest {
 }
 
 type IRequestStore = CRUDStore<IRequest>
+
+interface ITodo {
+  id: string
+  name: string
+  completed: boolean
+}
