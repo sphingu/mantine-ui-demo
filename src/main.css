@@ -37,3 +37,7 @@ body {
   /* background-color: #00000026; */
   /* border: 2px dashed white; */
 }
+
+.p-relative {
+  position: relative;
+}

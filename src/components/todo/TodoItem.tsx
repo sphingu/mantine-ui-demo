@@ -1,5 +1,9 @@
 import { Group, Text, createStyles, ActionIcon } from '@mantine/core'
 import { IconCircleCheck, IconCircleDotted, IconTrash } from '@tabler/icons'
+import { useMutation, useQueryClient } from 'react-query'
+import { notifyHelper } from '../../helpers'
+import { todoApi } from '../../services'
+import { ITodo } from '../../types'
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -25,18 +29,39 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface Props {
+  id: number
   name: string
   isCompleted?: boolean
-  onClick: () => void
-  onDelete: () => void
 }
 
-export function TodoItem({ name, isCompleted, onClick, onDelete }: Props) {
+export function TodoItem({ id, name, isCompleted }: Props) {
   const { classes } = useStyles()
+  const queryClient = useQueryClient()
+
+  const { mutate: deleteTodo, isLoading: isDeleting } = useMutation(
+    async () => todoApi.remove(id),
+    {
+      onSuccess: () => queryClient.invalidateQueries('todos'),
+      onError: () =>
+        notifyHelper.error('An error occurred while deleting todo'),
+    }
+  )
+  const { mutate: markAsCompleted, isLoading: isMarking } = useMutation(
+    async () => todoApi.markAsComplete(id, !isCompleted),
+    {
+      onSuccess: () => queryClient.invalidateQueries('todos'),
+      onError: () =>
+        notifyHelper.error('An error occurred while marking todo as complete'),
+    }
+  )
   return (
     <section className={classes.user}>
       <Group>
-        <ActionIcon variant="transparent" onClick={onClick}>
+        <ActionIcon
+          variant="transparent"
+          onClick={() => markAsCompleted()}
+          disabled={isMarking}
+        >
           {isCompleted ? (
             <IconCircleCheck color="lime" size={24} />
           ) : (
@@ -46,7 +71,11 @@ export function TodoItem({ name, isCompleted, onClick, onDelete }: Props) {
         <div style={{ flex: 1 }}>
           <Text td={isCompleted ? 'line-through' : ''}>{name}</Text>
         </div>
-        <ActionIcon variant="transparent" onClick={onDelete}>
+        <ActionIcon
+          variant="transparent"
+          onClick={() => deleteTodo()}
+          disabled={isDeleting}
+        >
           <IconTrash size={24} className={classes.deleteIcon} />
         </ActionIcon>
       </Group>

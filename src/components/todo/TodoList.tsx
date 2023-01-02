@@ -12,16 +12,9 @@ import { TodoItem } from './TodoItem'
 interface Props {
   isLoading: boolean
   items: ITodo[]
-  onItemClick: (todo: ITodo) => void
-  onItemDelete: (id: number) => void
 }
 
-export function TodoList({
-  isLoading,
-  items,
-  onItemClick,
-  onItemDelete,
-}: Props) {
+export function TodoList({ isLoading, items }: Props) {
   if (isLoading && !items.length) {
     return (
       <Center p="lg">
@@ -47,9 +40,8 @@ export function TodoList({
           <TodoItem
             name={todo.name}
             key={todo.id}
+            id={todo.id}
             isCompleted={todo.completed}
-            onClick={() => onItemClick(todo)}
-            onDelete={() => onItemDelete(todo.id)}
           />
         ))}
       </Stack>
