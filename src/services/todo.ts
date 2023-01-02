@@ -2,7 +2,7 @@ import { notifyHelper } from '../helpers'
 import { supabase } from '../supabaseClient'
 import { ITodo } from '../types'
 
-const queries = {
+export const todoApi = {
   list: async () => {
     const response = await supabase
       .from('todos')
@@ -29,8 +29,3 @@ const queries = {
       .eq('id', id)
       .single(),
 }
-
-export const list = notifyHelper.wrapAsync(queries.list)
-export const add = notifyHelper.wrapAsync(queries.add)
-export const update = notifyHelper.wrapAsync(queries.update)
-export const remove = notifyHelper.wrapAsync(queries.remove)

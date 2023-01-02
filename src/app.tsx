@@ -17,6 +17,7 @@ import {
 import { ThemeProvider } from './ThemeProvider'
 import { useSessionStore } from './stores'
 import { githubOAuthHelpers } from './helpers'
+import { QueryClientProvider, QueryClient } from 'react-query'
 
 const MainComponent = () => {
   const sessionStore = useSessionStore()
@@ -81,11 +82,15 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const queryClient = new QueryClient()
+
 export default function App() {
   return (
     <ThemeProvider>
-      <NotificationsProvider>
-        <RouterProvider router={router} />
+      <NotificationsProvider position="top-right">
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </NotificationsProvider>
       <TanStackRouterDevtools router={router} position="bottom-right" />
     </ThemeProvider>
