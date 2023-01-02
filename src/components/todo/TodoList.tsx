@@ -1,15 +1,28 @@
-import { Center, Loader, ScrollArea, Stack, Text } from '@mantine/core'
+import {
+  Center,
+  Loader,
+  LoadingOverlay,
+  ScrollArea,
+  Stack,
+  Text,
+} from '@mantine/core'
 import { ITodo } from '../../types'
 import { TodoItem } from './TodoItem'
 
 interface Props {
   isLoading: boolean
   items: ITodo[]
-  onItemClick: (id: string) => void
+  onItemClick: (todo: ITodo) => void
+  onItemDelete: (id: number) => void
 }
 
-export function TodoList({ isLoading, items, onItemClick }: Props) {
-  if (isLoading) {
+export function TodoList({
+  isLoading,
+  items,
+  onItemClick,
+  onItemDelete,
+}: Props) {
+  if (isLoading && !items.length) {
     return (
       <Center p="lg">
         <Loader />
@@ -29,12 +42,14 @@ export function TodoList({ isLoading, items, onItemClick }: Props) {
   return (
     <ScrollArea>
       <Stack justify="flex-start" spacing="xs" p="xs">
+        <LoadingOverlay visible={isLoading} />
         {items.map((todo) => (
           <TodoItem
             name={todo.name}
             key={todo.id}
             isCompleted={todo.completed}
-            onClick={() => onItemClick(todo.id)}
+            onClick={() => onItemClick(todo)}
+            onDelete={() => onItemDelete(todo.id)}
           />
         ))}
       </Stack>

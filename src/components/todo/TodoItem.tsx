@@ -1,5 +1,5 @@
-import { UnstyledButton, Group, Text, createStyles } from '@mantine/core'
-import { IconCircleCheck, IconCircleDotted } from '@tabler/icons'
+import { Group, Text, createStyles, ActionIcon } from '@mantine/core'
+import { IconCircleCheck, IconCircleDotted, IconTrash } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -19,28 +19,37 @@ const useStyles = createStyles((theme) => ({
           : theme.colors.gray[0],
     },
   },
+  deleteIcon: {
+    color: theme.colors.red[5],
+  },
 }))
 
 interface Props {
   name: string
   isCompleted?: boolean
   onClick: () => void
+  onDelete: () => void
 }
 
-export function TodoItem({ name, isCompleted, onClick }: Props) {
+export function TodoItem({ name, isCompleted, onClick, onDelete }: Props) {
   const { classes } = useStyles()
   return (
-    <UnstyledButton className={classes.user} onClick={onClick}>
+    <section className={classes.user}>
       <Group>
-        {isCompleted ? (
-          <IconCircleCheck color="lime" size={24} />
-        ) : (
-          <IconCircleDotted color="gray" size={24} />
-        )}
+        <ActionIcon variant="transparent" onClick={onClick}>
+          {isCompleted ? (
+            <IconCircleCheck color="lime" size={24} />
+          ) : (
+            <IconCircleDotted color="gray" size={24} />
+          )}
+        </ActionIcon>
         <div style={{ flex: 1 }}>
           <Text td={isCompleted ? 'line-through' : ''}>{name}</Text>
         </div>
+        <ActionIcon variant="transparent" onClick={onDelete}>
+          <IconTrash size={24} className={classes.deleteIcon} />
+        </ActionIcon>
       </Group>
-    </UnstyledButton>
+    </section>
   )
 }

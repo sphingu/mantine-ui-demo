@@ -12,7 +12,7 @@ export const todoApi = {
       response.data?.map(
         (item) =>
           ({
-            id: item.id as string,
+            id: item.id,
             name: item.task as string,
             completed: item.is_complete as boolean,
           } as ITodo)
@@ -22,7 +22,7 @@ export const todoApi = {
   add: async (task: string, userId: string) =>
     supabase.from('todos').insert({ task, user_id: userId }).single(),
   remove: async (id: number) => supabase.from('todos').delete().eq('id', id),
-  update: async (id: number, isCompleted: boolean) =>
+  markAsComplete: async (id: number, isCompleted: boolean) =>
     await supabase
       .from('todos')
       .update({ is_complete: isCompleted })
