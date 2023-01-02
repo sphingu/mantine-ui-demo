@@ -37,7 +37,8 @@ const MainComponent = () => {
         isAuthenticated={sessionStore.isAuthenticated()}
         links={[
           { label: 'Home', link: '/' },
-          { label: 'About', link: '/about' },
+          { label: 'Todo', link: '/todo' },
+          { label: 'Profile', link: '/profile' },
         ]}
         onLogout={sessionStore.logOut}
       />
