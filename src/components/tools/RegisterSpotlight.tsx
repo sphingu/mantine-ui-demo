@@ -6,6 +6,7 @@ import {
   IconDashboard,
   IconFileText,
   IconSearch,
+  IconUser,
 } from '@tabler/icons'
 import { useRouter } from '@tanstack/react-router'
 
@@ -14,14 +15,19 @@ export function RegisterSpotlight() {
 
   const actions: SpotlightAction[] = [
     {
-      title: 'Home',
+      title: 'Home Page',
       onTrigger: () => navigate({ to: '/' }),
       icon: <IconHome size={18} />,
     },
     {
-      title: 'About',
-      onTrigger: () => navigate({ to: '/about' }),
+      title: 'Todo Page',
+      onTrigger: () => navigate({ to: '/todo' }),
       icon: <IconDashboard size={18} />,
+    },
+    {
+      title: 'Profile Page',
+      onTrigger: () => navigate({ to: '/profile' }),
+      icon: <IconUser size={18} />,
     },
   ]
   return (

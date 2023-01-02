@@ -9,8 +9,8 @@ import { useSessionStore } from '../stores'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { notifyHelper } from '../helpers'
 
-export const About = () => {
-  usePageTitle('About')
+export const TodoPage = () => {
+  usePageTitle('Todo List')
   const queryClient = useQueryClient()
   const { userInfo } = useSessionStore()
   const [value, onChange] = useInputState('')

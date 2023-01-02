@@ -1,3 +1,4 @@
 export * from './Login'
 export * from './Home'
-export * from './About'
+export * from './Todo'
+export * from './Profile'

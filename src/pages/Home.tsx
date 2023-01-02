@@ -1,7 +1,7 @@
 import { RequestCrud } from '../components'
 import { usePageTitle } from '../hooks'
 
-export const Home = () => {
+export const HomePage = () => {
   usePageTitle('Home')
   return (
     <>

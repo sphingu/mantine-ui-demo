@@ -6,10 +6,12 @@ import {
   Burger,
   Paper,
   Transition,
+  Text,
 } from '@mantine/core'
 import { useClickOutside, useDisclosure } from '@mantine/hooks'
 import { IconChartRadar } from '@tabler/icons'
 import { useRouter } from '@tanstack/react-router'
+import { useSessionStore } from '../stores'
 
 const HEADER_HEIGHT = 60
 
@@ -104,6 +106,7 @@ export function AppHeader({
   isAuthenticated,
   onLogout,
 }: HeaderResponsiveProps) {
+  const { userInfo } = useSessionStore()
   const [opened, { toggle, close }] = useDisclosure(false)
   const ref = useClickOutside(
     () => setTimeout(close, 300),
@@ -141,7 +144,9 @@ export function AppHeader({
           <h1>Mantine</h1>
         </Group>
         <Group spacing={5} className={classes.links}>
-          {navLinks}
+          <Text>
+            Welcome <b>{userInfo?.email}</b>
+          </Text>
           {isAuthenticated && (
             <a
               href="#"

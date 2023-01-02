@@ -7,7 +7,7 @@ import {
   createRouteConfig,
   Outlet,
 } from '@tanstack/react-router'
-import { About, Home, Login } from './pages'
+import { TodoPage, HomePage, Login, ProfilePage } from './pages'
 import {
   TanStackRouterDevtools,
   AppHeader,
@@ -64,15 +64,20 @@ const rootRoute = createRouteConfig({
 
 const indexRoute = rootRoute.createRoute({
   path: '/',
-  component: Home,
+  component: HomePage,
 })
 
-const aboutRoute = rootRoute.createRoute({
-  path: '/about',
-  component: About,
+const todoRoute = rootRoute.createRoute({
+  path: '/todo',
+  component: TodoPage,
 })
 
-const routeConfig = rootRoute.addChildren([indexRoute, aboutRoute])
+const profileRoute = rootRoute.createRoute({
+  path: '/profile',
+  component: ProfilePage,
+})
+
+const routeConfig = rootRoute.addChildren([indexRoute, todoRoute, profileRoute])
 
 const router = createReactRouter({ routeConfig })
 

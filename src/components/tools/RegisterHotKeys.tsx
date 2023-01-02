@@ -5,7 +5,8 @@ export const RegisterHotKeys = () => {
   const { navigate } = useRouter()
   useHotkeys([
     ['H', () => navigate({ to: '/' })],
-    ['A', () => navigate({ to: '/about' })],
+    ['T', () => navigate({ to: '/todo' })],
+    ['P', () => navigate({ to: '/profile' })],
   ])
 
   return null
