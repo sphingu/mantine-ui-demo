@@ -6,10 +6,7 @@ import {
 } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { IconCirclePlus } from '@tabler/icons'
-import { useMutation, useQueryClient } from 'react-query'
-import { notifyHelper } from '../../helpers'
-import { todoApi } from '../../services'
-import { useSessionStore } from '../../stores'
+import { useCreateTodoMutation } from '../../services'
 
 const useStyles = createStyles((theme) => ({
   input: {
@@ -20,29 +17,18 @@ const useStyles = createStyles((theme) => ({
 
 export function TodoInput() {
   const { classes } = useStyles()
-  const { userInfo } = useSessionStore()
-  const queryClient = useQueryClient()
   const [value, onChange] = useInputState('')
-  const { mutate: addTodo, isLoading: isAdding } = useMutation(
-    async () => todoApi.add(value, userInfo?.id as string),
-    {
-      onSuccess: () => {
-        // Invalidate and refetch
-        queryClient.invalidateQueries('todos')
-        onChange('')
-      },
-      onError: () => notifyHelper.error('An error occurred while adding todo'),
-    }
-  )
+  const { mutate: createTodo, isLoading: isCreating } = useCreateTodoMutation({
+    onSuccess: () => onChange(''),
+  })
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+    createTodo(value)
+  }
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        addTodo()
-      }}
-      className="p-relative"
-    >
-      <LoadingOverlay visible={isAdding} />
+    <form onSubmit={submitHandler} className="p-relative">
+      <LoadingOverlay visible={isCreating} />
       <TextInput
         value={value}
         onChange={onChange}

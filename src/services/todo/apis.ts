@@ -1,6 +1,5 @@
-import { notifyHelper } from '../helpers'
-import { supabase } from '../supabaseClient'
-import { ITodo } from '../types'
+import { supabase } from '../../supabaseClient'
+import { ITodo } from '../../types'
 
 export const todoApi = {
   list: async () => {
@@ -19,13 +18,16 @@ export const todoApi = {
       ) || []
     )
   },
-  add: async (task: string, userId: string) =>
-    supabase.from('todos').insert({ task, user_id: userId }).single(),
+  add: async (data: { task: string; userId: string }) =>
+    supabase
+      .from('todos')
+      .insert({ task: data.task, user_id: data.userId })
+      .single(),
   remove: async (id: number) => supabase.from('todos').delete().eq('id', id),
-  markAsComplete: async (id: number, isCompleted: boolean) =>
+  markAsComplete: async (data: { id: number; isCompleted: boolean }) =>
     await supabase
       .from('todos')
-      .update({ is_complete: isCompleted })
-      .eq('id', id)
+      .update({ is_complete: data.isCompleted })
+      .eq('id', data.id)
       .single(),
 }

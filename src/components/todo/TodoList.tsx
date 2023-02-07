@@ -6,15 +6,11 @@ import {
   Stack,
   Text,
 } from '@mantine/core'
-import { ITodo } from '../../types'
+import { useTodoListQuery } from '../../services'
 import { TodoItem } from './TodoItem'
 
-interface Props {
-  isLoading: boolean
-  items: ITodo[]
-}
-
-export function TodoList({ isLoading, items }: Props) {
+export function TodoList() {
+  const { data: items = [], isLoading } = useTodoListQuery()
   if (isLoading && !items.length) {
     return (
       <Center p="lg">

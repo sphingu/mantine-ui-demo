@@ -1,9 +1,10 @@
-import { Group, Text, createStyles, ActionIcon } from '@mantine/core'
+import { Group, Text, createStyles, ActionIcon, Loader } from '@mantine/core'
 import { IconCircleCheck, IconCircleDotted, IconTrash } from '@tabler/icons'
-import { useMutation, useQueryClient } from 'react-query'
-import { notifyHelper } from '../../helpers'
-import { todoApi } from '../../services'
-import { ITodo } from '../../types'
+
+import {
+  useDeleteTodoMutation,
+  useMarkAsCompleteTodoMutation,
+} from '../../services'
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -36,33 +37,21 @@ interface Props {
 
 export function TodoItem({ id, name, isCompleted }: Props) {
   const { classes } = useStyles()
-  const queryClient = useQueryClient()
 
-  const { mutate: deleteTodo, isLoading: isDeleting } = useMutation(
-    async () => todoApi.remove(id),
-    {
-      onSuccess: () => queryClient.invalidateQueries('todos'),
-      onError: () =>
-        notifyHelper.error('An error occurred while deleting todo'),
-    }
-  )
-  const { mutate: markAsCompleted, isLoading: isMarking } = useMutation(
-    async () => todoApi.markAsComplete(id, !isCompleted),
-    {
-      onSuccess: () => queryClient.invalidateQueries('todos'),
-      onError: () =>
-        notifyHelper.error('An error occurred while marking todo as complete'),
-    }
-  )
+  const { mutate: deleteTodo, isLoading: isDeleting } = useDeleteTodoMutation()
+  const { mutate: markAsCompleted, isLoading: isMarking } =
+    useMarkAsCompleteTodoMutation()
   return (
     <section className={classes.user}>
       <Group>
         <ActionIcon
           variant="transparent"
-          onClick={() => markAsCompleted()}
+          onClick={() => markAsCompleted({ id, isCompleted: !isCompleted })}
           disabled={isMarking}
         >
-          {isCompleted ? (
+          {isMarking ? (
+            <Loader size="sm" />
+          ) : isCompleted ? (
             <IconCircleCheck color="lime" size={24} />
           ) : (
             <IconCircleDotted color="gray" size={24} />
@@ -73,10 +62,14 @@ export function TodoItem({ id, name, isCompleted }: Props) {
         </div>
         <ActionIcon
           variant="transparent"
-          onClick={() => deleteTodo()}
+          onClick={() => deleteTodo(id)}
           disabled={isDeleting}
         >
-          <IconTrash size={24} className={classes.deleteIcon} />
+          {isDeleting ? (
+            <Loader size="sm" />
+          ) : (
+            <IconTrash size={24} className={classes.deleteIcon} />
+          )}
         </ActionIcon>
       </Group>
     </section>

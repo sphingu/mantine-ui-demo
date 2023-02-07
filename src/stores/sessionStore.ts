@@ -2,7 +2,7 @@ import create from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { devtools } from 'zustand/middleware'
 import { User } from '@supabase/supabase-js'
-import { Immutable, setAutoFreeze } from 'immer'
+import { Immutable } from 'immer'
 import { githubOAuthHelpers } from '../helpers'
 
 type ISessionStore = Immutable<{
