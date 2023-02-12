@@ -25,7 +25,6 @@ export const signOut = async () => {
 export const getUserInfo = async (): Promise<User> => {
   const { data, error } = await supabase.auth.getUser()
   if (error || !data.user) {
-    notifyHelper.error('Received error getting your login information')
     throw Error('Something went wrong')
   }
   return data.user
