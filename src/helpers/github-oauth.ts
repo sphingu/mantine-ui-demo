@@ -31,7 +31,7 @@ export const getUserInfo = async (): Promise<User> => {
   return data.user
 }
 
-export const onAuthStatusChange = (setUserInfo: (user?: User) => void) => {
+export const onAuthStatusChange = (setUserInfo: (user: User) => void) => {
   return supabase.auth.onAuthStateChange(async (event, session) => {
     if (session?.user) {
       setUserInfo(session.user)
