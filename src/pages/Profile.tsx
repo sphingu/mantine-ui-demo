@@ -1,26 +1,8 @@
-import { useSessionStorage } from '@mantine/hooks'
-import { RequestCrud } from '../components'
 import { usePageTitle } from '../hooks'
 import { useSessionStore } from '../stores'
 
-import { createStyles, Avatar, Text, Group, Center } from '@mantine/core'
-import { IconPhoneCall, IconAt } from '@tabler/icons'
-
-export const ProfilePage = () => {
-  usePageTitle('Profile')
-  const { userInfo } = useSessionStore()
-  return (
-    <>
-      <h1>Profile Information</h1>
-      <UserInfoIcons
-        avatar={userInfo?.user_metadata.avatar_url as string}
-        email={userInfo?.email as string}
-        name={userInfo?.user_metadata.full_name as string}
-        username={userInfo?.user_metadata.user_name as string}
-      />
-    </>
-  )
-}
+import { createStyles, Avatar, Text, Group } from '@mantine/core'
+import { IconAt } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -34,41 +16,44 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-interface UserInfoIconsProps {
-  avatar: string
-  name: string
-  email: string
-  username: string
-}
-
-function UserInfoIcons({ avatar, name, username, email }: UserInfoIconsProps) {
+export const ProfilePage = () => {
+  usePageTitle('Profile')
   const { classes } = useStyles()
+  const { userInfo } = useSessionStore()
   return (
-    <div>
-      <Group noWrap>
-        <Avatar src={avatar} size={94} radius="xs" className={classes.avatar} />
-        <div>
-          <Text
-            size="xs"
-            sx={{ textTransform: 'uppercase' }}
-            weight={700}
-            color="dimmed"
-          >
-            {username}
-          </Text>
-
-          <Text size="lg" weight={500}>
-            {name}
-          </Text>
-
-          <Group noWrap spacing={10} mt={3}>
-            <IconAt stroke={1.5} size={16} className={classes.icon} />
-            <Text size="xs" color="dimmed">
-              {email}
+    <>
+      <h1>Profile Information</h1>
+      {!userInfo ? (
+        <p>No Profile Loaded</p>
+      ) : (
+        <Group noWrap>
+          <Avatar
+            src={userInfo.profileImage}
+            size={94}
+            radius="xs"
+            className={classes.avatar}
+          />
+          <div>
+            <Text
+              size="xs"
+              sx={{ textTransform: 'uppercase' }}
+              weight={700}
+              color="dimmed"
+            >
+              {userInfo.userName}
             </Text>
-          </Group>
-        </div>
-      </Group>
-    </div>
+            <Text size="lg" weight={500}>
+              {userInfo.fullName}
+            </Text>
+            <Group noWrap spacing={2} mt={3}>
+              <IconAt stroke={1.5} size={16} className={classes.icon} />
+              <Text size="xs" color="dimmed">
+                {userInfo.email}
+              </Text>
+            </Group>
+          </div>
+        </Group>
+      )}
+    </>
   )
 }

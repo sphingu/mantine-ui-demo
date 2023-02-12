@@ -22,17 +22,21 @@ export const signOut = async () => {
   }
 }
 
-export const getUserInfo = async (): Promise<User | undefined> => {
+export const getUserInfo = async (): Promise<User> => {
   const { data, error } = await supabase.auth.getUser()
-  if (error) {
-    // notifyHelper.error('Received error getting your login information')
-    return
+  if (error || !data.user) {
+    notifyHelper.error('Received error getting your login information')
+    throw Error('Something went wrong')
   }
   return data.user
 }
 
 export const onAuthStatusChange = (setUserInfo: (user?: User) => void) => {
   return supabase.auth.onAuthStateChange(async (event, session) => {
-    setUserInfo(session?.user)
+    if (session?.user) {
+      setUserInfo(session.user)
+    } else {
+      // TODO: handle error
+    }
   })
 }
