@@ -34,7 +34,7 @@ export function TodoInput() {
         onChange={onChange}
         size="md"
         className={classes.input}
-        placeholder="New Todo..."
+        placeholder="What needs to be done?"
         rightSection={
           <UnstyledButton type="submit" h="26px">
             <IconCirclePlus color="#228be6" size="26" />
