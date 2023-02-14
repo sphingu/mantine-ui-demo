@@ -30,7 +30,7 @@ export function TodoList() {
   }
   return (
     <ScrollArea>
-      <Stack justify="flex-start" spacing="xs" p="xs">
+      <Stack data-cy="todo-list" justify="flex-start" spacing="xs" p="xs">
         <LoadingOverlay visible={isLoading} />
         {items.map((todo) => (
           <TodoItem

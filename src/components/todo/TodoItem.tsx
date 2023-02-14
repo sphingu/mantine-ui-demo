@@ -48,6 +48,7 @@ export function TodoItem({ id, name, isCompleted }: Props) {
           variant="transparent"
           onClick={() => markAsCompleted({ id, isCompleted: !isCompleted })}
           disabled={isMarking}
+          aria-label={isCompleted ? 'Mark as incomplete' : 'Mark as complete'}
         >
           {isMarking ? (
             <Loader size="sm" />
@@ -64,6 +65,7 @@ export function TodoItem({ id, name, isCompleted }: Props) {
           variant="transparent"
           onClick={() => deleteTodo(id)}
           disabled={isDeleting}
+          aria-label="Delete"
         >
           {isDeleting ? (
             <Loader size="sm" />

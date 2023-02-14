@@ -30,13 +30,20 @@ export function TodoInput() {
     <form onSubmit={submitHandler} className="p-relative">
       <LoadingOverlay visible={isCreating} />
       <TextInput
+        disabled={isCreating}
+        required={true}
         value={value}
         onChange={onChange}
         size="md"
         className={classes.input}
         placeholder="What needs to be done?"
         rightSection={
-          <UnstyledButton type="submit" h="26px">
+          <UnstyledButton
+            disabled={isCreating}
+            type="submit"
+            h="26px"
+            aria-label="Add todo"
+          >
             <IconCirclePlus color="#228be6" size="26" />
           </UnstyledButton>
         }
