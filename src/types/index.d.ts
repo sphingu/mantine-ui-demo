@@ -24,3 +24,18 @@ interface ITodo {
   name: string
   completed: boolean
 }
+
+interface IAudit {
+  createdBy: string
+  createdAt: string
+  updatedBy?: string
+  updatedAt?: string
+}
+
+interface ICustomer extends IAudit {
+  id: number
+  name: string
+  mobile: string
+  address?: string
+  notes?: string
+}
