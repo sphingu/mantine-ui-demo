@@ -48,13 +48,13 @@ interface UserButtonProps extends UnstyledButtonProps {
 
 export function ListItem({ customer, ...others }: UserButtonProps) {
   const { classes } = useStyles()
-  const { setSelectedId } = useCustomerStore()
+  const { toggleOpenDrawer } = useCustomerStore()
 
   return (
     <UnstyledButton
       className={classes.user}
       {...others}
-      onClick={() => setSelectedId(customer.id)}
+      onClick={() => toggleOpenDrawer(customer.id)}
     >
       <Group>
         <Avatar radius="xl">{customer.name.slice(0, 2).toUpperCase()}</Avatar>
@@ -78,7 +78,7 @@ export function ListItem({ customer, ...others }: UserButtonProps) {
           )}
         </div>
         <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Group style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+          <Group style={{ gap: '5px', alignItems: 'center' }}>
             <IconClock size={16} />
             <Text color="dimmed" size="xs" style={{ lineHeight: 0 }}>
               {dayjs(customer.createdAt).fromNow()}

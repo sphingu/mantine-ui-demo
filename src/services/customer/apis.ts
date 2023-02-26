@@ -1,7 +1,7 @@
 import { ICustomer, ICustomerForm } from '../../types'
 
 let customers: ICustomer[] = []
-const sleep = (seconds = 2) =>
+const sleep = (seconds = 1) =>
   new Promise((res) => {
     setTimeout(() => {
       res(undefined)

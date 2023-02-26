@@ -4,13 +4,22 @@ import { devtools, persist } from 'zustand/middleware'
 
 export const useCustomerStore = create<{
   selectedId?: number
-  setSelectedId: (id?: number) => void
+  isDrawerOpen: boolean
+  toggleOpenDrawer: (id?: number) => void
 }>()(
   devtools(
     immer((set) => ({
-      setSelectedId(id) {
+      isDrawerOpen: false,
+      toggleOpenDrawer(id?: number) {
         set((state) => {
-          state.selectedId = id
+          if (id) {
+            // open drawer for edit case
+            state.selectedId = id
+            state.isDrawerOpen = true
+          } else {
+            state.isDrawerOpen = !state.isDrawerOpen
+            state.selectedId = undefined
+          }
         })
       },
     })),
