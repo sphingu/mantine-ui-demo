@@ -7,7 +7,7 @@ import {
   createRouteConfig,
   Outlet,
 } from '@tanstack/react-router'
-import { TodoPage, HomePage, Login, ProfilePage } from './pages'
+import { TodoPage, HomePage, Login, ProfilePage, CustomersPage } from './pages'
 import {
   TanStackRouterDevtools,
   AppHeader,
@@ -39,6 +39,7 @@ const MainComponent = () => {
           { label: 'Home', link: '/' },
           { label: 'Todo', link: '/todo' },
           { label: 'Profile', link: '/profile' },
+          { label: 'Customers', link: '/customers' },
         ]}
         onLogout={sessionStore.logOut}
       />
@@ -77,8 +78,17 @@ const profileRoute = rootRoute.createRoute({
   path: '/profile',
   component: ProfilePage,
 })
+const customersRoute = rootRoute.createRoute({
+  path: '/customers',
+  component: CustomersPage,
+})
 
-const routeConfig = rootRoute.addChildren([indexRoute, todoRoute, profileRoute])
+const routeConfig = rootRoute.addChildren([
+  indexRoute,
+  todoRoute,
+  profileRoute,
+  customersRoute,
+])
 
 const router = createReactRouter({ routeConfig })
 

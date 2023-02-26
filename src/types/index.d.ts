@@ -8,6 +8,7 @@ type CRUDStore<T> = Immutable<{
 }>
 
 type IRequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+type EntityStatus = 'active' | 'inactive'
 
 interface IRequest {
   id: string
@@ -26,10 +27,9 @@ interface ITodo {
 }
 
 interface IAudit {
-  createdBy: string
   createdAt: string
-  updatedBy?: string
   updatedAt?: string
+  status: EntityStatus
 }
 
 interface ICustomer extends IAudit {
