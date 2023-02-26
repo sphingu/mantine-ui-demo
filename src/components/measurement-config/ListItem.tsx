@@ -41,10 +41,10 @@ const useStyles = createStyles((theme) => ({
 }))
 
 interface UserButtonProps extends UnstyledButtonProps {
-  measurementConfig: IMeasurementConfig
+  data: IMeasurementConfig
 }
 
-export function ListItem({ measurementConfig, ...others }: UserButtonProps) {
+export function ListItem({ data, ...others }: UserButtonProps) {
   const { classes } = useStyles()
   const { toggleOpenDrawer } = useMeasurementConfigStore()
 
@@ -52,21 +52,21 @@ export function ListItem({ measurementConfig, ...others }: UserButtonProps) {
     <UnstyledButton
       className={classes.user}
       {...others}
-      onClick={() => toggleOpenDrawer(measurementConfig.id)}
+      onClick={() => toggleOpenDrawer(data.id)}
     >
       <Group>
         <Avatar color="blue" radius="xl">
-          {measurementConfig.name.slice(0, 2).toUpperCase()}
+          {data.name.slice(0, 2).toUpperCase()}
         </Avatar>
         <div style={{ flex: 1 }}>
-          <Text weight={500}>{measurementConfig.name}</Text>
-          <Text weight={500}>{measurementConfig.fields}</Text>
+          <Text weight={500}>{data.name}</Text>
+          <Text weight={500}>{data.fields}</Text>
         </div>
         <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
           <Group style={{ gap: '5px', alignItems: 'center' }}>
             <IconClock size={16} />
             <Text color="dimmed" size="xs" style={{ lineHeight: 0 }}>
-              {dayjs(measurementConfig.createdAt).fromNow()}
+              {dayjs(data.createdAt).fromNow()}
             </Text>
           </Group>
         </MediaQuery>
