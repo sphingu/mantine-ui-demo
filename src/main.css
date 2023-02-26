@@ -17,9 +17,17 @@ body {
 #root nav {
   /* height: 100%; */
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit !important;
+}
 
 .one {
-  padding: 0.5rem 1rem;
+  padding: 0;
   margin-bottom: 1rem;
   height: calc(100% - 60px);
   /* overflow-y: auto; */

@@ -1,27 +1,60 @@
-import { CustomDrawerWithTarget } from '../common/CustomDrawer'
-import { CreateOrUpdate } from './CreateOrUpdate'
-import { Details } from './Details'
+import {
+  Button,
+  Center,
+  createStyles,
+  Loader,
+  ScrollArea,
+  Text,
+} from '@mantine/core'
+import { IconUserExclamation, IconUserPlus } from '@tabler/icons'
+import { useCustomerListQuery } from '../../services/customer'
+import { ListItem } from './ListItem'
 
-export const List = () => {
-  return (
-    <section>
-      <header>Customer List</header>
-      <div>
-        <CustomDrawerWithTarget buttonText="Add Customer" title="Add Customer">
-          <CreateOrUpdate />
-        </CustomDrawerWithTarget>
+const useStyles = createStyles((theme) => ({
+  noRecordFound: {
+    flexDirection: 'column',
+  },
+}))
 
-        <CustomDrawerWithTarget
-          buttonText="Edit Customer"
-          title="Edit Customer"
+interface Props {
+  onAddClick: () => void
+}
+
+export const CustomerList = ({ onAddClick }: Props) => {
+  const { classes } = useStyles()
+  const { data: customers = [], isLoading } = useCustomerListQuery()
+  if (isLoading && !customers.length) {
+    return (
+      <Center p="lg">
+        <Loader />
+        <Text ml="sm" color="dimmed">
+          Loading customers...
+        </Text>
+      </Center>
+    )
+  }
+  if (!customers.length) {
+    return (
+      <Center p="lg" className={classes.noRecordFound}>
+        <IconUserExclamation color="lightgray" size={50} />
+        <Text c="dimmed"> No customers found</Text>
+        <Button
+          leftIcon={<IconUserPlus />}
+          variant="filled"
+          mt="md"
+          onClick={onAddClick}
         >
-          <CreateOrUpdate id="test-1" />
-        </CustomDrawerWithTarget>
+          Add Customer
+        </Button>
+      </Center>
+    )
+  }
 
-        <CustomDrawerWithTarget buttonText="Details" title="Customer Details">
-          <Details />
-        </CustomDrawerWithTarget>
-      </div>
-    </section>
+  return (
+    <ScrollArea mt="md">
+      {customers.map((item) => (
+        <ListItem key={item.id} customer={item} />
+      ))}
+    </ScrollArea>
   )
 }

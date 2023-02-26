@@ -7,6 +7,7 @@ import {
   IconFileText,
   IconSearch,
   IconUser,
+  IconUsers,
 } from '@tabler/icons'
 import { useRouter } from '@tanstack/react-router'
 
@@ -28,6 +29,11 @@ export function RegisterSpotlight() {
       title: 'Profile Page',
       onTrigger: () => navigate({ to: '/profile' }),
       icon: <IconUser size={18} />,
+    },
+    {
+      title: 'Customers Page',
+      onTrigger: () => navigate({ to: '/customers' }),
+      icon: <IconUsers size={18} />,
     },
   ]
   return (
