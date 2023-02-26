@@ -13,6 +13,7 @@ import { IconClock, IconDeviceMobile, IconEdit, IconPhone } from '@tabler/icons'
 import dayjs from 'dayjs'
 import { ICustomer } from '../../types'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { useCustomerStore } from '../../stores'
 dayjs.extend(relativeTime)
 
 const useStyles = createStyles((theme) => ({
@@ -47,9 +48,14 @@ interface UserButtonProps extends UnstyledButtonProps {
 
 export function ListItem({ customer, ...others }: UserButtonProps) {
   const { classes } = useStyles()
+  const { setSelectedId } = useCustomerStore()
 
   return (
-    <UnstyledButton className={classes.user} {...others}>
+    <UnstyledButton
+      className={classes.user}
+      {...others}
+      onClick={() => setSelectedId(customer.id)}
+    >
       <Group>
         <Avatar radius="xl">{customer.name.slice(0, 2).toUpperCase()}</Avatar>
         <div style={{ flex: 1 }}>
@@ -79,14 +85,6 @@ export function ListItem({ customer, ...others }: UserButtonProps) {
             </Text>
           </Group>
         </MediaQuery>
-
-        <ActionIcon
-          onClick={(e) => {
-            e.stopPropagation()
-          }}
-        >
-          <IconEdit />
-        </ActionIcon>
       </Group>
     </UnstyledButton>
   )

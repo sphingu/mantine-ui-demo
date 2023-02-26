@@ -1,8 +1,9 @@
 import { ActionIcon, createStyles, Drawer, Title } from '@mantine/core'
 import { IconUserPlus } from '@tabler/icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Customer } from '../components'
 import { usePageTitle } from '../hooks'
+import { useCustomerStore } from '../stores'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -16,13 +17,25 @@ const useStyles = createStyles((theme) => ({
 export const CustomersPage = () => {
   usePageTitle('Customers')
   const { classes } = useStyles()
+  const { selectedId, setSelectedId } = useCustomerStore()
   const [isOpened, setIsOpened] = useState(false)
-  const toggleOpened = () => setIsOpened((state) => !state)
+  const toggleOpened = () => {
+    if (isOpened && selectedId) {
+      setSelectedId(undefined)
+    }
+    setIsOpened((state) => !state)
+  }
+
+  useEffect(() => {
+    if (selectedId) {
+      toggleOpened()
+    }
+  }, [selectedId])
 
   return (
     <>
       <header className={classes.header}>
-        <Title>Customers</Title>
+        <Title>Customers </Title>
         <ActionIcon
           variant="filled"
           color="blue"
@@ -38,13 +51,13 @@ export const CustomersPage = () => {
         onClose={toggleOpened}
         title={
           <Title order={1} style={{ margin: 0 }}>
-            Add Customer
+            {selectedId ? 'Edit' : 'Add'} Customer
           </Title>
         }
         padding="xl"
         size="xl"
       >
-        <Customer.CreateOrUpdate onSuccess={toggleOpened} />
+        <Customer.CreateOrUpdate id={selectedId} onSuccess={toggleOpened} />
       </Drawer>
     </>
   )

@@ -21,7 +21,7 @@ export const useCustomerListQuery = () =>
     onError: () => notifyHelper.error(ERRORS.LIST),
   })
 export const useCustomerQuery = (id?: number) =>
-  useQuery(SINGLE_KEY, () => customerAPI.single(id), {
+  useQuery([SINGLE_KEY, id], () => customerAPI.single(id), {
     onError: () => notifyHelper.error(ERRORS.SINGLE),
     enabled: !!id,
   })
