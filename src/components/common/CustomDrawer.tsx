@@ -1,15 +1,27 @@
-import { Button, Drawer, Title } from '@mantine/core'
+import {
+  Button,
+  Drawer,
+  Title,
+  ButtonProps,
+  ActionIcon,
+  ActionIconProps,
+} from '@mantine/core'
+import { IconUserPlus } from '@tabler/icons'
 import { useState } from 'react'
 
 interface Props {
   title: string
-  buttonText: string
+  actionButtonChildren: React.ReactNode
   children: React.ReactElement
+  buttonProps?: ButtonProps
+  iconButtonProps?: ActionIconProps
 }
 
 export const CustomDrawerWithTarget = ({
   title,
-  buttonText,
+  buttonProps,
+  iconButtonProps,
+  actionButtonChildren,
   children,
 }: Props) => {
   const [isOpened, setIsOpened] = useState(false)
@@ -18,9 +30,15 @@ export const CustomDrawerWithTarget = ({
 
   return (
     <>
-      <Button size="md" onClick={toggleOpened}>
-        {buttonText}
-      </Button>
+      {iconButtonProps ? (
+        <ActionIcon {...iconButtonProps} onClick={toggleOpened}>
+          {actionButtonChildren}
+        </ActionIcon>
+      ) : (
+        <Button {...buttonProps} onClick={toggleOpened}>
+          {actionButtonChildren}
+        </Button>
+      )}
       <Drawer
         opened={isOpened}
         onClose={toggleOpened}

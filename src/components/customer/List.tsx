@@ -18,7 +18,11 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-export const List = () => {
+interface Props {
+  onAddClick: () => void
+}
+
+export const List = ({ onAddClick }: Props) => {
   const { classes } = useStyles()
   const { data: customers = [], isLoading } = useCustomerListQuery()
   if (isLoading && !customers.length) {
@@ -36,7 +40,12 @@ export const List = () => {
       <Center p="lg" className={classes.noRecordFound}>
         <IconUserExclamation color="lightgray" size={50} />
         <Text c="dimmed"> No customers found</Text>
-        <Button leftIcon={<IconUserPlus />} variant="filled" mt="md">
+        <Button
+          leftIcon={<IconUserPlus />}
+          variant="filled"
+          mt="md"
+          onClick={onAddClick}
+        >
           Add Customer
         </Button>
       </Center>
@@ -45,22 +54,6 @@ export const List = () => {
   return (
     <section>
       <header>Customer List</header>
-      <div>
-        <CustomDrawerWithTarget buttonText="Add Customer" title="Add Customer">
-          <CreateOrUpdate />
-        </CustomDrawerWithTarget>
-
-        <CustomDrawerWithTarget
-          buttonText="Edit Customer"
-          title="Edit Customer"
-        >
-          <CreateOrUpdate id="test-1" />
-        </CustomDrawerWithTarget>
-
-        <CustomDrawerWithTarget buttonText="Details" title="Customer Details">
-          <Details />
-        </CustomDrawerWithTarget>
-      </div>
     </section>
   )
 }
