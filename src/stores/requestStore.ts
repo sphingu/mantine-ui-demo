@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import { devtools, persist } from 'zustand/middleware'
 import { IRequestStore } from '../types'
