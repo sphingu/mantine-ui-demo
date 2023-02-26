@@ -1,14 +1,9 @@
+import { sleep } from '../../helpers'
 import { ICustomer, ICustomerForm } from '../../types'
 
 let customers: ICustomer[] = []
-const sleep = (seconds = 1) =>
-  new Promise((res) => {
-    setTimeout(() => {
-      res(undefined)
-    }, seconds * 1000)
-  })
-
 let count = 1
+
 export const customerAPI = {
   list: async (): Promise<ICustomer[]> => {
     await sleep()

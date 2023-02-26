@@ -6,8 +6,8 @@ import {
   ScrollArea,
   Text,
 } from '@mantine/core'
-import { IconUserExclamation, IconUserPlus } from '@tabler/icons'
-import { useCustomerListQuery } from '../../services'
+import { IconRuler, IconUserExclamation } from '@tabler/icons'
+import { useMeasurementConfigListQuery } from '../../services'
 import { ListItem } from './ListItem'
 
 const useStyles = createStyles((theme) => ({
@@ -20,32 +20,33 @@ interface Props {
   onAddClick: () => void
 }
 
-export const CustomerList = ({ onAddClick }: Props) => {
+export const MeasurementList = ({ onAddClick }: Props) => {
   const { classes } = useStyles()
-  const { data: customers = [], isLoading } = useCustomerListQuery()
-  if (isLoading && !customers.length) {
+  const { data: measurementConfigs = [], isLoading } =
+    useMeasurementConfigListQuery()
+  if (isLoading && !measurementConfigs.length) {
     return (
       <Center p="lg">
         <Loader />
         <Text ml="sm" color="dimmed">
-          Loading customers...
+          Loading measurement configs...
         </Text>
       </Center>
     )
   }
-  if (!customers.length) {
+  if (!measurementConfigs.length) {
     return (
       <Center p="lg" className={classes.noRecordFound}>
         <IconUserExclamation color="lightgray" size={50} />
-        <Text c="dimmed"> No customers found</Text>
+        <Text c="dimmed"> No measurement configs found</Text>
         <Button
-          leftIcon={<IconUserPlus />}
+          leftIcon={<IconRuler />}
           variant="filled"
           mt="md"
           size="md"
           onClick={onAddClick}
         >
-          Add Customer
+          Add Measurement Config
         </Button>
       </Center>
     )
@@ -53,8 +54,8 @@ export const CustomerList = ({ onAddClick }: Props) => {
 
   return (
     <ScrollArea mt="md">
-      {customers.map((item) => (
-        <ListItem key={item.id} customer={item} />
+      {measurementConfigs.map((item) => (
+        <ListItem key={item.id} data={item} />
       ))}
     </ScrollArea>
   )

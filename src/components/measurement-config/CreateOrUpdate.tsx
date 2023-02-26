@@ -11,15 +11,16 @@ import {
   LoadingOverlay,
 } from '@mantine/core'
 import { FormErrors, useForm, yupResolver } from '@mantine/form'
-import { ICustomerForm } from '../../types'
+import { IMeasurementConfigForm } from '../../types'
 import { isEmpty } from 'lodash-es'
-import { useCustomerMutate, useCustomerQuery } from '../../services'
+import {
+  useMeasurementConfigMutate,
+  useMeasurementConfigQuery,
+} from '../../services'
 
-const yupSchema: yup.SchemaOf<ICustomerForm> = yup.object().shape({
+const yupSchema: yup.SchemaOf<IMeasurementConfigForm> = yup.object().shape({
   name: yup.string().required().min(5),
-  mobile: yup.string().max(10),
-  address: yup.string(),
-  notes: yup.string(),
+  fields: yup.string().required(),
 })
 
 interface Props {
@@ -30,19 +31,17 @@ interface Props {
 
 export const CreateOrUpdate = ({ id, onSuccess, onCancel }: Props) => {
   const isCreate = !id
-  const form = useForm<ICustomerForm>({
+  const form = useForm<IMeasurementConfigForm>({
     initialValues: {
       name: '',
-      address: '',
-      mobile: '',
-      notes: '',
+      fields: '',
     },
     validate: yupResolver(yupSchema),
     validateInputOnBlur: true,
   })
-  const { data, isLoading } = useCustomerQuery(id)
-  const { mutate: createOrUpdateCustomer, isLoading: isMutating } =
-    useCustomerMutate({
+  const { data, isLoading } = useMeasurementConfigQuery(id)
+  const { mutate: createOrUpdateMeasurementConfig, isLoading: isMutating } =
+    useMeasurementConfigMutate({
       isCreate,
       onSuccess,
     })
@@ -50,14 +49,12 @@ export const CreateOrUpdate = ({ id, onSuccess, onCancel }: Props) => {
   useEffect(() => {
     form.setValues({
       name: data?.name ?? '',
-      address: data?.address ?? '',
-      mobile: data?.mobile ?? '',
-      notes: data?.notes ?? '',
+      fields: data?.fields ?? '',
     })
   }, [data])
 
-  const handleSubmit = (values: ICustomerForm) => {
-    createOrUpdateCustomer({ id, customer: values })
+  const handleSubmit = (values: IMeasurementConfigForm) => {
+    createOrUpdateMeasurementConfig({ id, measurementConfig: values })
   }
 
   const handleError = (errors: FormErrors) => {
@@ -72,7 +69,7 @@ export const CreateOrUpdate = ({ id, onSuccess, onCancel }: Props) => {
   }
 
   if (!isCreate && isEmpty(data)) {
-    return <Text>Error : no customer information found </Text>
+    return <Text>Error : no measurement config information found </Text>
   }
 
   return (

@@ -41,3 +41,10 @@ interface ICustomer extends IAudit {
 }
 
 type ICustomerForm = Pick<ICustomer, 'name' | 'mobile' | 'address' | 'notes'>
+
+interface IMeasurementConfig extends IAudit {
+  id: number
+  name: string
+  fields: string
+}
+type IMeasurementConfigForm = Pick<IMeasurementConfig, 'name' | 'fields'>

@@ -18,6 +18,7 @@ import { ThemeProvider } from './ThemeProvider'
 import { useSessionStore } from './stores'
 import { githubOAuthHelpers } from './helpers'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import { MeasurementConfigsPage } from './pages/MeasurementConfigs'
 
 const MainComponent = () => {
   const sessionStore = useSessionStore()
@@ -40,6 +41,7 @@ const MainComponent = () => {
           { label: 'Todo', link: '/todo' },
           { label: 'Profile', link: '/profile' },
           { label: 'Customers', link: '/customers' },
+          { label: 'Measurement Configs', link: '/measurement-configs' },
         ]}
         onLogout={sessionStore.logOut}
       />
@@ -82,12 +84,17 @@ const customersRoute = rootRoute.createRoute({
   path: '/customers',
   component: CustomersPage,
 })
+const measurementConfigsRoute = rootRoute.createRoute({
+  path: '/measurement-configs',
+  component: MeasurementConfigsPage,
+})
 
 const routeConfig = rootRoute.addChildren([
   indexRoute,
   todoRoute,
   profileRoute,
   customersRoute,
+  measurementConfigsRoute,
 ])
 
 const router = createReactRouter({ routeConfig })
