@@ -26,8 +26,8 @@ const useStyles = createStyles((theme) => ({
     borderStyle: 'solid',
     borderColor:
       theme.colorScheme === 'dark'
-        ? theme.colors.dark[5]
-        : theme.colors.gray[5],
+        ? theme.colors.dark[7]
+        : theme.colors.gray[3],
 
     '&:last-of-type': {
       borderWidth: 0,
@@ -57,7 +57,9 @@ export function ListItem({ customer, ...others }: UserButtonProps) {
       onClick={() => toggleOpenDrawer(customer.id)}
     >
       <Group>
-        <Avatar radius="xl">{customer.name.slice(0, 2).toUpperCase()}</Avatar>
+        <Avatar color="blue" radius="xl">
+          {customer.name.slice(0, 2).toUpperCase()}
+        </Avatar>
         <div style={{ flex: 1 }}>
           <Text weight={500}>{customer.name}</Text>
 

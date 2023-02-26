@@ -42,6 +42,7 @@ export const CustomerList = ({ onAddClick }: Props) => {
           leftIcon={<IconUserPlus />}
           variant="filled"
           mt="md"
+          size="md"
           onClick={onAddClick}
         >
           Add Customer

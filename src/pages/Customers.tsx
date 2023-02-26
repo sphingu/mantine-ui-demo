@@ -26,10 +26,10 @@ export const CustomersPage = () => {
         <ActionIcon
           variant="filled"
           color="blue"
-          size="lg"
+          size="xl"
           onClick={toggleOpenAddEditDrawer}
         >
-          <IconUserPlus size={20} />
+          <IconUserPlus size={24} />
         </ActionIcon>
       </header>
       <Customer.List onAddClick={toggleOpenAddEditDrawer} />
@@ -47,6 +47,7 @@ export const CustomersPage = () => {
         <Customer.CreateOrUpdate
           id={selectedId}
           onSuccess={toggleOpenAddEditDrawer}
+          onCancel={toggleOpenAddEditDrawer}
         />
       </Drawer>
     </>

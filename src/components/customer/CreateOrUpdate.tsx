@@ -25,9 +25,10 @@ const yupSchema: yup.SchemaOf<ICustomerForm> = yup.object().shape({
 interface Props {
   id?: number
   onSuccess: () => void
+  onCancel: () => void
 }
 
-export const CreateOrUpdate = ({ id, onSuccess }: Props) => {
+export const CreateOrUpdate = ({ id, onSuccess, onCancel }: Props) => {
   const isCreate = !id
   const form = useForm<ICustomerForm>({
     initialValues: {
@@ -93,13 +94,8 @@ export const CreateOrUpdate = ({ id, onSuccess }: Props) => {
         <Button size="md" type="submit" disabled={!form.isDirty()}>
           {isCreate ? 'Create' : 'Update'}
         </Button>
-        <Button
-          size="md"
-          variant="default"
-          type="reset"
-          disabled={!form.isDirty()}
-        >
-          Reset
+        <Button size="md" variant="default" type="button" onClick={onCancel}>
+          Cancel
         </Button>
       </Group>
     </form>
