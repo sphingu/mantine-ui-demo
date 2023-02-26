@@ -1,7 +1,7 @@
 import { usePageTitle } from '../hooks'
 import { useSessionStore } from '../stores'
 
-import { createStyles, Avatar, Text, Group } from '@mantine/core'
+import { createStyles, Avatar, Text, Group, Title } from '@mantine/core'
 import { IconAt } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
@@ -22,11 +22,11 @@ export const ProfilePage = () => {
   const { userInfo } = useSessionStore()
   return (
     <>
-      <h1>Profile Information</h1>
+      <Title p="sm">Profile information</Title>
       {!userInfo ? (
-        <p>No Profile Loaded</p>
+        <Text p="sm">No Profile Loaded</Text>
       ) : (
-        <Group noWrap>
+        <Group p="sm" noWrap>
           <Avatar
             src={userInfo.profileImage}
             size={94}

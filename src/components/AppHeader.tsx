@@ -7,6 +7,7 @@ import {
   Paper,
   Transition,
   Text,
+  Title,
 } from '@mantine/core'
 import { useClickOutside, useDisclosure } from '@mantine/hooks'
 import { IconChartRadar } from '@tabler/icons'
@@ -141,7 +142,7 @@ export function AppHeader({
       <Container className={classes.header}>
         <Group>
           <IconChartRadar size="34" color="#228be6" stroke={1.5} />
-          <h1>Mantine</h1>
+          <Title>Mantine</Title>
         </Group>
         <Group spacing={5} className={classes.links}>
           <Text>

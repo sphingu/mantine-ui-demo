@@ -6,9 +6,14 @@ import {
   Text,
   createStyles,
   ActionIcon,
+  MediaQuery,
+  Anchor,
 } from '@mantine/core'
-import { IconEdit } from '@tabler/icons'
+import { IconClock, IconDeviceMobile, IconEdit, IconPhone } from '@tabler/icons'
+import dayjs from 'dayjs'
 import { ICustomer } from '../../types'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 const useStyles = createStyles((theme) => ({
   user: {
@@ -48,14 +53,32 @@ export function ListItem({ customer, ...others }: UserButtonProps) {
       <Group>
         <Avatar radius="xl">{customer.name.slice(0, 2).toUpperCase()}</Avatar>
         <div style={{ flex: 1 }}>
-          <Text size="sm" weight={500}>
-            {customer.name}
-          </Text>
+          <Text weight={500}>{customer.name}</Text>
 
-          <Text color="dimmed" size="xs">
-            {customer.createdAt}
-          </Text>
+          {customer.mobile && (
+            <Group
+              style={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+            >
+              <IconDeviceMobile size={16} />
+              <Anchor
+                size="sm"
+                href={`tel:${customer.mobile}`}
+                target="_blank"
+                style={{ lineHeight: 0 }}
+              >
+                {customer.mobile}
+              </Anchor>
+            </Group>
+          )}
         </div>
+        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+          <Group style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+            <IconClock size={16} />
+            <Text color="dimmed" size="xs" style={{ lineHeight: 0 }}>
+              {dayjs(customer.createdAt).fromNow()}
+            </Text>
+          </Group>
+        </MediaQuery>
 
         <ActionIcon
           onClick={(e) => {
