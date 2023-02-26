@@ -1,7 +1,7 @@
 import { ICustomer } from '../../types'
 
 let customers: ICustomer[] = []
-const sleep = (seconds = 10) =>
+const sleep = (seconds = 5) =>
   new Promise((res) => {
     setTimeout(() => {
       res(undefined)
