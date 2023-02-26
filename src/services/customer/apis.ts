@@ -1,7 +1,7 @@
 import { ICustomer, ICustomerForm } from '../../types'
 
 let customers: ICustomer[] = []
-const sleep = (seconds = 5) =>
+const sleep = (seconds = 2) =>
   new Promise((res) => {
     setTimeout(() => {
       res(undefined)
@@ -29,14 +29,14 @@ export const customerAPI = {
     if (id) {
       customers = customers.map((item) =>
         id === item.id
-          ? { ...item, ...customer, updatedAt: new Date().toUTCString() }
+          ? { ...item, ...customer, updatedAt: new Date().toJSON() }
           : item
       )
     } else {
       customers.push({
         id: count++,
         ...customer,
-        createdAt: new Date().toUTCString(),
+        createdAt: new Date().toJSON(),
         status: 'active',
       })
     }

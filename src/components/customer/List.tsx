@@ -1,16 +1,14 @@
 import {
-  ActionIcon,
   Button,
   Center,
   createStyles,
   Loader,
+  ScrollArea,
   Text,
 } from '@mantine/core'
 import { IconUserExclamation, IconUserPlus } from '@tabler/icons'
 import { useCustomerListQuery } from '../../services/customer'
-import { CustomDrawerWithTarget } from '../common/CustomDrawer'
-import { CreateOrUpdate } from './CreateOrUpdate'
-import { Details } from './Details'
+import { ListItem } from './ListItem'
 
 const useStyles = createStyles((theme) => ({
   noRecordFound: {
@@ -22,7 +20,7 @@ interface Props {
   onAddClick: () => void
 }
 
-export const List = ({ onAddClick }: Props) => {
+export const CustomerList = ({ onAddClick }: Props) => {
   const { classes } = useStyles()
   const { data: customers = [], isLoading } = useCustomerListQuery()
   if (isLoading && !customers.length) {
@@ -51,9 +49,12 @@ export const List = ({ onAddClick }: Props) => {
       </Center>
     )
   }
+
   return (
-    <section>
-      <header>Customer List</header>
-    </section>
+    <ScrollArea mt="md">
+      {customers.map((item) => (
+        <ListItem key={item.id} customer={item} />
+      ))}
+    </ScrollArea>
   )
 }
