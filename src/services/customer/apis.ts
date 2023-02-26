@@ -1,4 +1,4 @@
-import { ICustomer } from '../../types'
+import { ICustomer, ICustomerForm } from '../../types'
 
 let customers: ICustomer[] = []
 const sleep = (seconds = 5) =>
@@ -8,20 +8,38 @@ const sleep = (seconds = 5) =>
     }, seconds * 1000)
   })
 
+let count = 1
 export const customerAPI = {
   list: async (): Promise<ICustomer[]> => {
     await sleep()
     return customers
   },
-  add: async (customer: ICustomer): Promise<void> => {
+  single: async (id?: number): Promise<ICustomer | undefined> => {
     await sleep()
-    customers.push(customer)
+    return customers.find((customer) => customer.id === id)
   },
-  update: async (customer: ICustomer): Promise<void> => {
+  createOrUpdate: async ({
+    id,
+    customer,
+  }: {
+    customer: ICustomerForm
+    id?: number
+  }): Promise<void> => {
     await sleep()
-    customers = customers.map((item) =>
-      customer.id === item.id ? customer : item
-    )
+    if (id) {
+      customers = customers.map((item) =>
+        id === item.id
+          ? { ...item, ...customer, updatedAt: new Date().toUTCString() }
+          : item
+      )
+    } else {
+      customers.push({
+        id: count++,
+        ...customer,
+        createdAt: new Date().toUTCString(),
+        status: 'active',
+      })
+    }
   },
   remove: async (customerId: number): Promise<void> => {
     await sleep()

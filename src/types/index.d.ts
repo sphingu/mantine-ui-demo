@@ -35,7 +35,9 @@ interface IAudit {
 interface ICustomer extends IAudit {
   id: number
   name: string
-  mobile: string
+  mobile?: string
   address?: string
   notes?: string
 }
+
+type ICustomerForm = Pick<ICustomer, 'name' | 'mobile' | 'address' | 'notes'>

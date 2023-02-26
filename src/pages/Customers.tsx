@@ -47,7 +47,7 @@ export const CustomersPage = () => {
         padding="xl"
         size="xl"
       >
-        <Customer.CreateOrUpdate />
+        <Customer.CreateOrUpdate onSuccess={toggleOpened} />
       </Drawer>
     </section>
   )

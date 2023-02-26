@@ -9,6 +9,7 @@ export const RegisterHotKeys = () => {
     ['H', () => navigate({ to: '/' })],
     ['T', () => navigate({ to: '/todo' })],
     ['P', () => navigate({ to: '/profile' })],
+    ['C', () => navigate({ to: '/customers' })],
     ['M', () => setMock(true)],
   ])
 
