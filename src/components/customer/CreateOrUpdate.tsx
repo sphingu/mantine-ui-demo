@@ -84,12 +84,28 @@ export const CreateOrUpdate = ({ id, onSuccess, onCancel }: Props) => {
       <TextInput
         size="md"
         withAsterisk
+        name="name"
         label="Name"
         {...form.getInputProps('name')}
       />
-      <TextInput size="md" label="Mobile" {...form.getInputProps('mobile')} />
-      <Textarea size="md" label="Address" {...form.getInputProps('address')} />
-      <Textarea size="md" label="Notes" {...form.getInputProps('notes')} />
+      <TextInput
+        size="md"
+        name="mobile"
+        label="Mobile"
+        {...form.getInputProps('mobile')}
+      />
+      <Textarea
+        size="md"
+        name="address"
+        label="Address"
+        {...form.getInputProps('address')}
+      />
+      <Textarea
+        size="md"
+        name="notes"
+        label="Notes"
+        {...form.getInputProps('notes')}
+      />
       <Group position="right" mt="xl">
         <Button size="md" type="submit" disabled={!form.isDirty()}>
           {isCreate ? 'Create' : 'Update'}

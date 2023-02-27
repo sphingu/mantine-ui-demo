@@ -110,7 +110,7 @@ describe('todo page tests', () => {
   })
 
   describe('perform actions', () => {
-    it.only('should add new todo', () => {
+    it('should add new todo', () => {
       interceptTodoList([])
       cy.visit('/todo')
 
