@@ -4,8 +4,9 @@ body {
 }
 @font-face {
   font-family: myFirstFont;
-  /* src: url('/cinderela/Cinderela Personal Use.ttf'); */
-  src: url('/Sweet Sensations Personal Use.ttf');
+  src: url('/cinderela/Cinderela Personal Use.ttf');
+  src: url('/Breeze Personal Use.ttf');
+  /* src: url('/Sweet Sensations Personal Use.ttf'); */
 }
 
 body {

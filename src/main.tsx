@@ -8,26 +8,30 @@ const useStyles = createStyles((theme) => ({
   bgImg: {
     // filter: 'blur(1px)',
     position: 'absolute',
-    top: 0,
-    left: -80,
+    top: -30,
+    left: -180,
+    boxShadow: 'inset 0 0 10px 10px #000',
   },
   miraImg: {
     position: 'absolute',
-    top: '-120px',
-    left: 100,
+    top: -190,
+    left: 80,
   },
   // ref: https://in.pinterest.com/pin/1051801687951177624/
   name: {
     position: 'absolute',
-    top: 40,
-    left: 15,
+    top: 85,
+    left: 40,
     margin: 0,
     rotate: '310deg',
     // color: '#171731',
-    color: '#c1ffba',
+    // color: '#f4527f',
+    color: '#ec3178',
     letterSpacing: 2,
     // textShadow: '13px 5px 52px #db2f3b',
-    textShadow: '0 0 10px black',
+    textShadow: '0 0 10px #f1f5b7',
+    // textShadow: '0 0 22px #270483',
+    // 0 0
   },
 }))
 
@@ -39,7 +43,11 @@ const App = () => {
       {/* <img className={classes.bgImg} src="green-bg.webp" /> */}
       {/* <img className={classes.bgImg} src="bga.jpeg" height="1200" /> */}
       {/* <img className={classes.bgImg} src="bgb.jpeg" height="1100" /> */}
-      <img className={classes.bgImg} src="main.png" height="1100" />
+      <img
+        className={classes.bgImg}
+        src="https://m.media-amazon.com/images/I/71JOQoVOjuL._SL1001_.jpg"
+        height="1100"
+      />
       <img
         className={classes.miraImg}
         src="/mira.png"
