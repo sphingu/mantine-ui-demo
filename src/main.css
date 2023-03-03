@@ -2,8 +2,14 @@ html,
 body {
   height: 100%;
 }
+@font-face {
+  font-family: myFirstFont;
+  /* src: url('/cinderela/Cinderela Personal Use.ttf'); */
+  src: url('/Sweet Sensations Personal Use.ttf');
+}
+
 body {
-  font-family: 'Slabo 27px', serif;
+  font-family: myFirstFont, 'Slabo 27px', serif;
 }
 body {
   /* background: url('/bg1.jpg') no-repeat center center fixed; */
