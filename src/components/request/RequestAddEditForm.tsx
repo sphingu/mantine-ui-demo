@@ -12,7 +12,7 @@ import { IRequest } from '../../types'
 
 const REQUEST_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 
-const requestSchema: yup.SchemaOf<IRequest> = yup.object().shape({
+const requestSchema: yup.Schema<Omit<IRequest, 'method'>> = yup.object().shape({
   id: yup.string().required().uuid(),
   name: yup.string().required().min(5),
   method: yup.mixed().oneOf(REQUEST_METHODS).required(),

@@ -18,7 +18,7 @@ import {
   useMeasurementConfigQuery,
 } from '../../services'
 
-const yupSchema: yup.SchemaOf<IMeasurementConfigForm> = yup.object().shape({
+const yupSchema: yup.Schema<IMeasurementConfigForm> = yup.object().shape({
   name: yup.string().required().min(5),
   fields: yup.string().required(),
 })

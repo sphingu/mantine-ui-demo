@@ -6,7 +6,7 @@ import {
   ScrollArea,
   Text,
 } from '@mantine/core'
-import { IconUserExclamation, IconUserPlus } from '@tabler/icons'
+import { IconUserExclamation, IconUserPlus } from '@tabler/icons-react'
 import { useCustomerListQuery } from '../../services'
 import { ListItem } from './ListItem'
 

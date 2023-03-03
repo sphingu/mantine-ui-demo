@@ -2,7 +2,7 @@ import { usePageTitle } from '../hooks'
 import { useSessionStore } from '../stores'
 
 import { createStyles, Avatar, Text, Group, Title } from '@mantine/core'
-import { IconAt } from '@tabler/icons'
+import { IconAt } from '@tabler/icons-react'
 
 const useStyles = createStyles((theme) => ({
   icon: {

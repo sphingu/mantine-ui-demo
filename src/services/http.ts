@@ -30,7 +30,6 @@ export async function makeRequest<T>({
     loading: true,
     message: msgs?.loading || 'Requesting...',
     autoClose: false,
-    disallowClose: true,
   })
 
   const requestUrl = url.includes('http') ? url : `${baseUrl}${url}`

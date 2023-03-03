@@ -6,7 +6,6 @@ import {
   ActionIcon,
   ActionIconProps,
 } from '@mantine/core'
-import { IconUserPlus } from '@tabler/icons'
 import { useState } from 'react'
 
 interface Props {

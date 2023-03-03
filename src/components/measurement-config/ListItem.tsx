@@ -7,7 +7,7 @@ import {
   createStyles,
   MediaQuery,
 } from '@mantine/core'
-import { IconClock } from '@tabler/icons'
+import { IconClock } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import { IMeasurementConfig } from '../../types'
 import relativeTime from 'dayjs/plugin/relativeTime'

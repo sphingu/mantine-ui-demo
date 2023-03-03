@@ -32,7 +32,6 @@ const loading = (message: string): string => {
     loading: true,
     message: message,
     autoClose: false,
-    disallowClose: true,
   })
   return id
 }

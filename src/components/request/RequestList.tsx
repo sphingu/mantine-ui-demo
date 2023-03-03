@@ -1,5 +1,5 @@
 import { Table, Group, ActionIcon, ScrollArea } from '@mantine/core'
-import { IconPencil, IconTrash } from '@tabler/icons'
+import { IconPencil, IconTrash } from '@tabler/icons-react'
 import { IRequest } from '../../types'
 
 interface Props {

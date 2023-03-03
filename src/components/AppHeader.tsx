@@ -10,7 +10,7 @@ import {
   Title,
 } from '@mantine/core'
 import { useClickOutside, useDisclosure } from '@mantine/hooks'
-import { IconChartRadar } from '@tabler/icons'
+import { IconChartRadar } from '@tabler/icons-react'
 import { useRouter } from '@tanstack/react-router'
 import { useSessionStore } from '../stores'
 

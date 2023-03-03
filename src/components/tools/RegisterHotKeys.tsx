@@ -1,16 +1,17 @@
 import { useHotkeys } from '@mantine/hooks'
-import { useRouter } from '@tanstack/react-router'
+import { useNavigate } from '@tanstack/react-router'
 import { useSessionStore } from '../../stores'
 
 export const RegisterHotKeys = () => {
-  const { navigate } = useRouter()
+  const navigate = useNavigate()
   const { setMock } = useSessionStore()
   useHotkeys([
     ['H', () => navigate({ to: '/' })],
     ['T', () => navigate({ to: '/todo' })],
     ['P', () => navigate({ to: '/profile' })],
     ['C', () => navigate({ to: '/customers' })],
-    ['R', () => navigate({ to: '/measurement-configs' })],
+    ['R', () => navigate({ to: '/settings-measurements' })],
+    ['S', () => navigate({ to: '/settings' })],
     ['M', () => setMock(true)],
   ])
 

@@ -1,18 +1,27 @@
-import { useEffect } from 'react'
+import { ReactComponentElement, ReactElement, useEffect } from 'react'
 import { Container, Group, Loader } from '@mantine/core'
-import { NotificationsProvider } from '@mantine/notifications'
 import {
   RouterProvider,
-  createReactRouter,
-  createRouteConfig,
   Outlet,
+  Router,
+  RootRoute,
+  Route,
 } from '@tanstack/react-router'
-import { TodoPage, HomePage, Login, ProfilePage, CustomersPage } from './pages'
+import { Notifications } from '@mantine/notifications'
+import {
+  TodoPage,
+  HomePage,
+  Login,
+  ProfilePage,
+  CustomersPage,
+  SettingsPage,
+} from './pages'
 import {
   TanStackRouterDevtools,
   AppHeader,
   RegisterHotKeys,
   RegisterSpotlight,
+  AppBreadcrumb,
 } from './components'
 import { ThemeProvider } from './ThemeProvider'
 import { useSessionStore } from './stores'
@@ -45,6 +54,9 @@ const MainComponent = () => {
         ]}
         onLogout={sessionStore.logOut}
       />
+      <Container w="100%">
+        <AppBreadcrumb />
+      </Container>
       <Container className="one box-style">
         {sessionStore.loading ? (
           <Group position="center">
@@ -61,43 +73,27 @@ const MainComponent = () => {
     </>
   )
 }
+let rootRoute = new RootRoute({ component: MainComponent })
 
-const rootRoute = createRouteConfig({
-  component: MainComponent,
-})
+const routes = {
+  '/': { component: HomePage },
+  '/todo': { component: TodoPage },
+  '/profile': { component: ProfilePage },
+  '/customers': { component: CustomersPage },
+  '/settings': { component: SettingsPage },
+  '/settings-measurements': { component: MeasurementConfigsPage },
+}
+const routeChildren = Object.entries(routes).map(
+  ([path, routeInfo]) =>
+    new Route({
+      getParentRoute: () => rootRoute,
+      path,
+      component: routeInfo.component,
+    })
+)
 
-const indexRoute = rootRoute.createRoute({
-  path: '/',
-  component: HomePage,
-})
-
-const todoRoute = rootRoute.createRoute({
-  path: '/todo',
-  component: TodoPage,
-})
-
-const profileRoute = rootRoute.createRoute({
-  path: '/profile',
-  component: ProfilePage,
-})
-const customersRoute = rootRoute.createRoute({
-  path: '/customers',
-  component: CustomersPage,
-})
-const measurementConfigsRoute = rootRoute.createRoute({
-  path: '/measurement-configs',
-  component: MeasurementConfigsPage,
-})
-
-const routeConfig = rootRoute.addChildren([
-  indexRoute,
-  todoRoute,
-  profileRoute,
-  customersRoute,
-  measurementConfigsRoute,
-])
-
-const router = createReactRouter({ routeConfig })
+const routeTree = rootRoute.addChildren(routeChildren)
+const router = new Router({ routeTree })
 
 declare module '@tanstack/react-router' {
   interface RegisterRouter {
@@ -110,12 +106,12 @@ const queryClient = new QueryClient()
 export default function App() {
   return (
     <ThemeProvider>
-      <NotificationsProvider position="top-right">
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </NotificationsProvider>
-      <TanStackRouterDevtools router={router} position="bottom-right" />
+      <Notifications position="top-right" />
+
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+      {/* <TanStackRouterDevtools router={router} position="bottom-right" /> */}
     </ThemeProvider>
   )
 }

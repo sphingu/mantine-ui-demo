@@ -5,7 +5,7 @@ import {
   LoadingOverlay,
 } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
-import { IconCirclePlus } from '@tabler/icons'
+import { IconCirclePlus } from '@tabler/icons-react'
 import { useCreateTodoMutation } from '../../services'
 
 const useStyles = createStyles((theme) => ({

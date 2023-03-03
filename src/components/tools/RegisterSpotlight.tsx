@@ -1,19 +1,18 @@
-import { Button, Group } from '@mantine/core'
-import { SpotlightProvider, openSpotlight } from '@mantine/spotlight'
+import { SpotlightProvider } from '@mantine/spotlight'
 import type { SpotlightAction } from '@mantine/spotlight'
 import {
   IconHome,
   IconDashboard,
-  IconFileText,
   IconSearch,
   IconUser,
   IconUsers,
   IconRuler,
-} from '@tabler/icons'
-import { useRouter } from '@tanstack/react-router'
+  IconSettings,
+} from '@tabler/icons-react'
+import { useNavigate } from '@tanstack/react-router'
 
 export function RegisterSpotlight() {
-  const { navigate } = useRouter()
+  const navigate = useNavigate()
 
   const actions: SpotlightAction[] = [
     {
@@ -37,8 +36,13 @@ export function RegisterSpotlight() {
       icon: <IconUsers size={18} />,
     },
     {
-      title: 'Measurement Configs',
-      onTrigger: () => navigate({ to: '/measurement-configs' }),
+      title: 'Settings',
+      onTrigger: () => navigate({ to: '/settings' }),
+      icon: <IconSettings size={18} />,
+    },
+    {
+      title: 'Measurement Settings',
+      onTrigger: () => navigate({ to: '/settings-measurements' }),
       icon: <IconRuler size={18} />,
     },
   ]

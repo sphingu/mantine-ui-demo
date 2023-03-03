@@ -1,5 +1,9 @@
 import { Group, Text, createStyles, ActionIcon, Loader } from '@mantine/core'
-import { IconCircleCheck, IconCircleDotted, IconTrash } from '@tabler/icons'
+import {
+  IconCircleCheck,
+  IconCircleDotted,
+  IconTrash,
+} from '@tabler/icons-react'
 
 import {
   useDeleteTodoMutation,

@@ -15,7 +15,7 @@ import { ICustomerForm } from '../../types'
 import { isEmpty } from 'lodash-es'
 import { useCustomerMutate, useCustomerQuery } from '../../services'
 
-const yupSchema: yup.SchemaOf<ICustomerForm> = yup.object().shape({
+const yupSchema: yup.Schema<ICustomerForm> = yup.object().shape({
   name: yup.string().required().min(5),
   mobile: yup.string().max(10),
   address: yup.string(),

@@ -9,7 +9,12 @@ import {
   MediaQuery,
   Anchor,
 } from '@mantine/core'
-import { IconClock, IconDeviceMobile, IconEdit, IconPhone } from '@tabler/icons'
+import {
+  IconClock,
+  IconDeviceMobile,
+  IconEdit,
+  IconPhone,
+} from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import { ICustomer } from '../../types'
 import relativeTime from 'dayjs/plugin/relativeTime'

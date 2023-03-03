@@ -1,5 +1,5 @@
 import { Button, Group, Text } from '@mantine/core'
-import { IconBrandGithub } from '@tabler/icons'
+import { IconBrandGithub } from '@tabler/icons-react'
 import { useState } from 'react'
 import { usePageTitle } from '../hooks'
 

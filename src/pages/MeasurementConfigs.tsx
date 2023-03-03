@@ -1,5 +1,5 @@
 import { ActionIcon, createStyles, Drawer, Title } from '@mantine/core'
-import { IconRuler, IconUserPlus } from '@tabler/icons'
+import { IconRuler } from '@tabler/icons-react'
 import { MeasurementConfig } from '../components'
 import { usePageTitle } from '../hooks'
 import { useMeasurementConfigStore } from '../stores'

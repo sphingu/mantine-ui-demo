@@ -1,5 +1,5 @@
 import { ActionIcon, createStyles, Drawer, Title } from '@mantine/core'
-import { IconUserPlus } from '@tabler/icons'
+import { IconUserPlus } from '@tabler/icons-react'
 import { Customer } from '../components'
 import { usePageTitle } from '../hooks'
 import { useCustomerStore } from '../stores'
