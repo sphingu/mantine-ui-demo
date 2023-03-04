@@ -20,8 +20,8 @@ const useStyles = createStyles((theme) => ({
   // ref: https://in.pinterest.com/pin/1051801687951177624/
   name: {
     position: 'absolute',
-    top: 85,
-    left: 40,
+    top: 70,
+    left: 30,
     margin: 0,
     rotate: '310deg',
     // color: '#171731',
