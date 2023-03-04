@@ -8,14 +8,14 @@ const useStyles = createStyles((theme) => ({
   bgImg: {
     // filter: 'blur(1px)',
     position: 'absolute',
-    top: -30,
-    left: -180,
+    top: 0,
+    left: 0,
     boxShadow: 'inset 0 0 10px 10px #000',
   },
   miraImg: {
     position: 'absolute',
     top: -190,
-    left: 80,
+    left: -11,
   },
   // ref: https://in.pinterest.com/pin/1051801687951177624/
   name: {
@@ -26,10 +26,10 @@ const useStyles = createStyles((theme) => ({
     rotate: '310deg',
     // color: '#171731',
     // color: '#f4527f',
-    color: '#ec3178',
+    color: '#b1d3f4',
     letterSpacing: 2,
     // textShadow: '13px 5px 52px #db2f3b',
-    textShadow: '0 0 10px #f1f5b7',
+    textShadow: '0 0 33px #010414',
     // textShadow: '0 0 22px #270483',
     // 0 0
   },
@@ -45,7 +45,7 @@ const App = () => {
       {/* <img className={classes.bgImg} src="bgb.jpeg" height="1100" /> */}
       <img
         className={classes.bgImg}
-        src="https://m.media-amazon.com/images/I/71JOQoVOjuL._SL1001_.jpg"
+        src="https://i.pinimg.com/originals/7c/5e/44/7c5e44c69c80ef10b1fc97d353f3d02f.jpg"
         height="1100"
       />
       <img
@@ -54,7 +54,7 @@ const App = () => {
         height="1500"
         width="675"
       />
-      <p className={classes.name} style={{ fontSize: '5rem' }}>
+      <p className={classes.name} style={{ fontSize: '6rem' }}>
         Mira
       </p>
     </Center>
